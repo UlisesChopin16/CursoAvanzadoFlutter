@@ -6,7 +6,7 @@ class MyApp extends StatefulWidget {
   // private named constructor
   const MyApp._internal();
 
-  final int appState = 0;
+  int get appState => 0;
 
   // single instance -- singleton
   static const MyApp instance = MyApp._internal();

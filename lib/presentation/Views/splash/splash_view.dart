@@ -13,14 +13,13 @@ class SplashView extends StatefulWidget {
 }
 
 class _SplashViewState extends State<SplashView> {
-
   Timer? _timer;
 
-  _startTimer() {
+  void _startTimer() {
     _timer = Timer(const Duration(seconds: 2), _goNext);
   }
 
-  _goNext() {
+  void _goNext() {
     Navigator.pushReplacementNamed(context, Routes.onBoardingRoute);
   }
 
@@ -40,9 +39,9 @@ class _SplashViewState extends State<SplashView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       backgroundColor: ColorManager.primary,
-      body: const Center(
+      body: Center(
         child: Image(
           image: AssetImage(
             ImageAssets.splashLogo,

@@ -20,7 +20,7 @@ class OnboardingView extends StatefulWidget {
 class _OnboardingViewState extends State<OnboardingView> {
   OnboardingViewModel viewModel = OnboardingViewModel();
 
-  _bind() {
+  void _bind() {
     viewModel.start();
   }
 
@@ -43,7 +43,7 @@ class _OnboardingViewState extends State<OnboardingView> {
         builder: (context, snapshot) {
 
           
-          late final slider;
+          late final SliderViewObject slider;
           if (snapshot.hasData) {
             slider = snapshot.data!;
           } else {

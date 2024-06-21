@@ -16,7 +16,7 @@ class OnboardingViewModel extends BaseViewModels
 
   final PageController pageController = PageController();
 
-  final List<SliderObjectModel> sliders = const [
+  List<SliderObjectModel> get sliders => const [
     SliderObjectModel(
       title: StringsManager.onBoardingTitle1,
       subTitle: StringsManager.onBoardingSubTitle1,
@@ -89,7 +89,7 @@ class OnboardingViewModel extends BaseViewModels
   }
 
   @override
-  Sink get inputSliderViewObject => _streamController.sink;
+  Sink<SliderViewObject> get inputSliderViewObject => _streamController.sink;
 
   @override
   Stream<SliderViewObject> get outputSliderViewObject =>
@@ -113,7 +113,7 @@ abstract class OnBoardingViewModelInputs {
   void onReverse(); // when user clicks on left arrow or swipe
   void onPageChanged(int index); // when user swipes
 
-  Sink get inputSliderViewObject; // this is the way to add data to our stream .. stream input
+  Sink<SliderViewObject> get inputSliderViewObject; // this is the way to add data to our stream .. stream input
 }
 
 // outputs mean the data or results that will be sent from our view model to our view
