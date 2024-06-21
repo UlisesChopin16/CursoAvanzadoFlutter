@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:curso_avanzado_flutter/constants/assets_manager.dart';
 import 'package:curso_avanzado_flutter/constants/strings_manager.dart';
 import 'package:curso_avanzado_flutter/constants/values_manager.dart';
-import 'package:curso_avanzado_flutter/domain/models/slider_object_model.dart';
+import 'package:curso_avanzado_flutter/domain/models/slider_object_model/slider_object_model.dart';
 import 'package:curso_avanzado_flutter/presentation/base/base_view_models.dart';
 import 'package:flutter/material.dart';
 

@@ -9,9 +9,9 @@ class LoginResponse {
   @JsonKey(name: 'message')
   final String? message;
   @JsonKey(name: 'customer')
-  final Customer? customer;
+  final CustomerResponse? customer;
   @JsonKey(name: 'contacts')
-  final Contacts? contacts;
+  final ContactResponse? contacts;
 
   const LoginResponse({
     this.status,
@@ -27,7 +27,7 @@ class LoginResponse {
 }
 
 @JsonSerializable()
-class Customer {
+class CustomerResponse {
   @JsonKey(name: 'id')
   final String? id;
   @JsonKey(name: 'name')
@@ -39,7 +39,7 @@ class Customer {
   @JsonKey(name: 'numOfNotifications')
   final int? numOfNotifications;
 
-  const Customer({
+  const CustomerResponse({
     this.id,
     this.name,
     this.apellidoP,
@@ -47,14 +47,14 @@ class Customer {
     this.numOfNotifications,
   });
 
-  factory Customer.fromJson(Map<String, dynamic> json) =>
-      _$CustomerFromJson(json);
+  factory CustomerResponse.fromJson(Map<String, dynamic> json) =>
+      _$CustomerResponseFromJson(json);
 
-  Map<String, dynamic> toJson() => _$CustomerToJson(this);
+  Map<String, dynamic> toJson() => _$CustomerResponseToJson(this);
 }
 
 @JsonSerializable()
-class Contacts {
+class ContactResponse {
   @JsonKey(name: 'phone')
   final String? phone;
   @JsonKey(name: 'web_site')
@@ -64,15 +64,15 @@ class Contacts {
   @JsonKey(name: 'github')
   final String? github;
 
-  const Contacts({
+  const ContactResponse({
     this.phone,
     this.webSite,
     this.email,
     this.github,
   });
 
-  factory Contacts.fromJson(Map<String, dynamic> json) =>
-      _$ContactsFromJson(json);  
+  factory ContactResponse.fromJson(Map<String, dynamic> json) =>
+      _$ContactResponseFromJson(json);  
 
-  Map<String, dynamic> toJson() => _$ContactsToJson(this);
+  Map<String, dynamic> toJson() => _$ContactResponseToJson(this);
 }

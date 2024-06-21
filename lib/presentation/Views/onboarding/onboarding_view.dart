@@ -2,7 +2,7 @@ import 'package:curso_avanzado_flutter/constants/assets_manager.dart';
 import 'package:curso_avanzado_flutter/constants/color_manager.dart';
 import 'package:curso_avanzado_flutter/constants/strings_manager.dart';
 import 'package:curso_avanzado_flutter/constants/values_manager.dart';
-import 'package:curso_avanzado_flutter/domain/models/slider_object_model.dart';
+import 'package:curso_avanzado_flutter/domain/models/slider_object_model/slider_object_model.dart';
 import 'package:curso_avanzado_flutter/presentation/Views/onboarding/onboarding_view_model.dart';
 import 'package:curso_avanzado_flutter/presentation/routes/routes_manager.dart';
 import 'package:flutter/material.dart';
