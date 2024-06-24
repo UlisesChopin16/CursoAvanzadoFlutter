@@ -4,6 +4,7 @@ import 'package:curso_avanzado_flutter/constants/strings_manager.dart';
 import 'package:curso_avanzado_flutter/constants/values_manager.dart';
 import 'package:curso_avanzado_flutter/domain/models/slider_object_model/slider_object_model.dart';
 import 'package:curso_avanzado_flutter/presentation/Views/onboarding/onboarding_view_model.dart';
+import 'package:curso_avanzado_flutter/presentation/components/text_button_component.dart';
 import 'package:curso_avanzado_flutter/presentation/routes/routes_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -41,8 +42,6 @@ class _OnboardingViewState extends State<OnboardingView> {
     return StreamBuilder<SliderViewObject>(
         stream: viewModel.outputSliderViewObject,
         builder: (context, snapshot) {
-
-          
           late final SliderViewObject slider;
           if (snapshot.hasData) {
             slider = snapshot.data!;
@@ -77,15 +76,11 @@ class _OnboardingViewState extends State<OnboardingView> {
                 children: [
                   Align(
                     alignment: Alignment.centerRight,
-                    child: TextButton(
+                    child: TextButtonComponent(
                       onPressed: () {
                         Navigator.pushReplacementNamed(context, Routes.loginRoute);
                       },
-                      child: Text(
-                        StringsManager.skip,
-                        textAlign: TextAlign.end,
-                        style: Theme.of(context).textTheme.headlineMedium,
-                      ),
+                      text: StringsManager.skip,
                     ),
                   ),
                   IndicatorPage(

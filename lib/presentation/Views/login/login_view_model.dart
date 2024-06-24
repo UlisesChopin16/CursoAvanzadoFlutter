@@ -25,9 +25,9 @@ class LoginViewModel extends BaseViewModels implements LoginViewModelInputs, Log
     password: '',
   );
 
-  LoginUseCase? loginUseCase;
+  LoginUseCase loginUseCase;
 
-  LoginViewModel({this.loginUseCase});
+  LoginViewModel({required this.loginUseCase});
 
   // inputs
   @override
@@ -42,7 +42,7 @@ class LoginViewModel extends BaseViewModels implements LoginViewModelInputs, Log
 
   @override
   void login() async {
-    (await loginUseCase!.execute(
+    (await loginUseCase.execute(
       LoginUseCaseInput(
         email: loginObject.userName,
         password: loginObject.password,

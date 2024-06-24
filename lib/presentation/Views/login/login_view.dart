@@ -1,8 +1,11 @@
+import 'package:curso_avanzado_flutter/app/di.dart';
 import 'package:curso_avanzado_flutter/constants/assets_manager.dart';
 import 'package:curso_avanzado_flutter/constants/color_manager.dart';
 import 'package:curso_avanzado_flutter/constants/strings_manager.dart';
 import 'package:curso_avanzado_flutter/constants/values_manager.dart';
 import 'package:curso_avanzado_flutter/presentation/Views/login/login_view_model.dart';
+import 'package:curso_avanzado_flutter/presentation/components/text_button_component.dart';
+import 'package:curso_avanzado_flutter/presentation/routes/routes_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -14,7 +17,7 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  LoginViewModel loginViewModel = LoginViewModel(loginUseCase: null);
+  LoginViewModel loginViewModel = instance<LoginViewModel>();
 
   TextEditingController userNameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -33,14 +36,12 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   void initState() {
-    // TODO: implement initState
     bind();
     super.initState();
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     loginViewModel.dispose();
     userNameController.dispose();
     passwordController.dispose();
@@ -52,6 +53,7 @@ class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorManager.white,
       body: Container(
         padding: const EdgeInsets.only(top: AppPadding.p100),
         color: ColorManager.white,
@@ -122,15 +124,52 @@ class _LoginViewState extends State<LoginView> {
                         child: StreamBuilder<bool>(
                           stream: loginViewModel.outputIsAllInputsValid,
                           builder: (context, snapshot) {
-                            return ElevatedButton(
-                              onPressed: (snapshot.data ?? false)
-                                  ? () {
-                                      loginViewModel.login();
-                                    }
-                                  : null,
-                              child: const Text(StringsManager.login),
+                            return SizedBox(
+                              width: double.infinity,
+                              height: AppSize.s40,
+                              child: ElevatedButton(
+                                onPressed: (snapshot.data ?? false)
+                                    ? () {
+                                        loginViewModel.login();
+                                      }
+                                    : null,
+                                child: Text(
+                                  StringsManager.login,
+                                  style: Theme.of(context).textTheme.titleMedium,
+                                ),
+                              ),
                             );
                           },
+                        ),
+                      ),
+                      const Gap(AppSize.s8),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          left: AppPadding.p28,
+                          right: AppPadding.p28,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // FORGOT PASSWORD
+                            TextButtonComponent(
+                              onPressed: () {
+                                Navigator.pushReplacementNamed(context, Routes.forgotPasswordRoute);
+                              },
+                              text: StringsManager.forgetPassword,
+                            ),
+                            const Gap(AppSize.s8),
+                            // REGISTER
+                            Flexible(
+                              child: TextButtonComponent(
+                                onPressed: () {
+                                  Navigator.pushReplacementNamed(context, Routes.registerRoute);
+                                },
+                                text: StringsManager.registerText,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],

@@ -1,4 +1,5 @@
 // ignore_for_file: constant_identifier_names
+import 'package:curso_avanzado_flutter/app/app_preferences.dart';
 import 'package:curso_avanzado_flutter/constants/constants.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
@@ -11,6 +12,10 @@ const String AUTHORIZATION = 'authorization';
 const String DEFAULT_LANGUAGE = 'language';
 
 class DioFactory {
+  final AppPreferences appPreferences;
+
+  const DioFactory(this.appPreferences);
+
   Future<Dio> getDio() async {
     final dio = Dio();
 
@@ -35,11 +40,14 @@ class DioFactory {
     } else {
       dio.interceptors.add(
         PrettyDioLogger(
+          compact: true,
+          error: true,
           requestHeader: true,
+          request: true,
           requestBody: true,
           responseBody: true,
-          responseHeader: false,
-          error: true,
+          responseHeader: true,
+          logPrint: (object) => debugPrint(object.toString()),
         ),
       );
     }

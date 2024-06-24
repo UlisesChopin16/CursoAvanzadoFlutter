@@ -16,8 +16,8 @@ class StringsManager {
   static const String passwordError = "Password is wrong";
   static const String password = "Password";
   static const String login = "Login";
-  static const String forgetPassword = "forgot_password_text";
-  static const String registerText = "register_text";
+  static const String forgetPassword = "I forget my password";
+  static const String registerText = "Not a member yet? Register now";
   static const String loading = "loading";
   static const String retryAgain = "retry_again";
   static const String ok = "ok";

@@ -54,7 +54,7 @@ ThemeData get themeData => ThemeData(
     displaySmall: getBoldStyle(color: ColorManager.primary, fontSize: FontSize.s16),
     headlineMedium: getRegularStyle(color: ColorManager.primary, fontSize: FontSize.s14),
     titleMedium: getMediumStyle(color: ColorManager.lightGrey, fontSize: FontSize.s14),
-    titleSmall: getMediumStyle(color: ColorManager.primary, fontSize: FontSize.s14),
+    titleSmall: getMediumStyle(color: ColorManager.primary, fontSize: FontSize.s12),
     bodyMedium: getMediumStyle(color: ColorManager.lightGrey),
     bodySmall: getRegularStyle(color: ColorManager.grey1),
     bodyLarge: getRegularStyle(color: ColorManager.grey),

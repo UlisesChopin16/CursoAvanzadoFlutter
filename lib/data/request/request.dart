@@ -16,7 +16,7 @@ class LoginRequest {
       'email': email,
       'password': password,
       'imei': imei,
-      'deviceName': deviceName,
+      'device_name': deviceName,
     };
   }
 }
