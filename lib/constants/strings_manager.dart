@@ -10,12 +10,12 @@ class StringsManager {
   static const String onBoardingSubTitle3 = "on_boarding_desc3";
   static const String onBoardingSubTitle4 = "on_boarding_desc4";
   static const String skip = "skip";
-  static const String username = "username_hint";
+  static const String username = "User name";
   static const String mobileNumber = "mobile_number_hint";
-  static const String usernameError = "invalid_user_name";
-  static const String passwordError = "invalid_password";
-  static const String password = "password_hint";
-  static const String login = "login_button";
+  static const String usernameError = "User name is wrong";
+  static const String passwordError = "Password is wrong";
+  static const String password = "Password";
+  static const String login = "Login";
   static const String forgetPassword = "forgot_password_text";
   static const String registerText = "register_text";
   static const String loading = "loading";

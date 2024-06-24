@@ -24,7 +24,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       onGenerateRoute: RouteGenerator.getRoute,
       initialRoute: Routes.splashRoute,
-      theme: getApplicationTheme(),
+      theme: themeData,
     );
   }
 }
