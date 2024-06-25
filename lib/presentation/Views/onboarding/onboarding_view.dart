@@ -3,97 +3,70 @@ import 'package:curso_avanzado_flutter/constants/color_manager.dart';
 import 'package:curso_avanzado_flutter/constants/strings_manager.dart';
 import 'package:curso_avanzado_flutter/constants/values_manager.dart';
 import 'package:curso_avanzado_flutter/domain/models/slider_object_model/slider_object_model.dart';
-import 'package:curso_avanzado_flutter/presentation/Views/onboarding/onboarding_view_model.dart';
+import 'package:curso_avanzado_flutter/presentation/Views/onboarding/onboardin_view_model/onboarding_view_model.dart';
 import 'package:curso_avanzado_flutter/presentation/components/text_button_component.dart';
 import 'package:curso_avanzado_flutter/presentation/routes/routes_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class OnboardingView extends StatefulWidget {
-  const OnboardingView({super.key});
-
-  @override
-  State<OnboardingView> createState() => _OnboardingViewState();
-}
-
-class _OnboardingViewState extends State<OnboardingView> {
-  OnboardingViewModel viewModel = OnboardingViewModel();
-
-  void _bind() {
-    viewModel.start();
-  }
+class OnboardingView extends ConsumerWidget {
+  const OnboardingView({
+    super.key,
+  });
 
   @override
-  void initState() {
-    _bind();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    viewModel.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return StreamBuilder<SliderViewObject>(
-        stream: viewModel.outputSliderViewObject,
-        builder: (context, snapshot) {
-          late final SliderViewObject slider;
-          if (snapshot.hasData) {
-            slider = snapshot.data!;
-          } else {
-            return const SizedBox();
-          }
-          return Scaffold(
-            backgroundColor: ColorManager.white,
-            appBar: AppBar(
-              backgroundColor: ColorManager.white,
-              elevation: AppSize.s0,
-              systemOverlayStyle: const SystemUiOverlayStyle(
-                statusBarColor: ColorManager.white,
-                statusBarIconBrightness: Brightness.dark,
-                statusBarBrightness: Brightness.dark,
-              ),
-            ),
-            body: PageView.builder(
-              controller: viewModel.pageController,
-              itemCount: slider.numOfSliders,
-              onPageChanged: viewModel.onPageChanged,
-              itemBuilder: (context, index) {
-                return OnBoardingPage(
-                  sliderObject: viewModel.sliders[index],
-                );
-              },
-            ),
-            bottomSheet: Container(
-              color: ColorManager.white,
-              height: AppSize.s100,
-              child: Column(
-                children: [
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: TextButtonComponent(
-                      onPressed: () {
-                        Navigator.pushReplacementNamed(context, Routes.loginRoute);
-                      },
-                      text: StringsManager.skip,
-                    ),
-                  ),
-                  IndicatorPage(
-                    index: slider.currentIndex,
-                    length: slider.numOfSliders,
-                    onReverse: viewModel.onReverse,
-                    onForward: viewModel.onForward,
-                  ),
-                ],
-              ),
-            ),
+  Widget build(BuildContext context, WidgetRef ref) {
+    final viewModel = ref.watch(onboardingViewModelProvider.notifier);
+    final (length, index) = ref.watch(onboardingViewModelProvider.select((value) => (value.numOfSliders, value.currentIndex)));
+    const sliders = SliderViewObject.sliders;
+    return Scaffold(
+      backgroundColor: ColorManager.white,
+      appBar: AppBar(
+        backgroundColor: ColorManager.white,
+        elevation: AppSize.s0,
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: ColorManager.white,
+          statusBarIconBrightness: Brightness.dark,
+          statusBarBrightness: Brightness.dark,
+        ),
+      ),
+      body: PageView.builder(
+        controller: viewModel.pageController,
+        itemCount: length,
+        onPageChanged: viewModel.onPageChanged,
+        itemBuilder: (context, index) {
+          return OnBoardingPage(
+            sliderObject: sliders[index],
           );
-        });
+        },
+      ),
+      bottomSheet: Container(
+        color: ColorManager.white,
+        height: AppSize.s100,
+        child: Column(
+          children: [
+            Align(
+              alignment: Alignment.centerRight,
+              child: TextButtonComponent(
+                onPressed: () {
+                  Navigator.pushReplacementNamed(context, Routes.loginRoute);
+                },
+                text: StringsManager.skip,
+              ),
+            ),
+            IndicatorPage(
+              index: index,
+              length: length,
+              onReverse: viewModel.onReverse,
+              onForward: viewModel.onForward,
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
 

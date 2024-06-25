@@ -1,22 +1,23 @@
-import 'dart:async';
-
 import 'package:curso_avanzado_flutter/constants/assets_manager.dart';
 import 'package:curso_avanzado_flutter/constants/strings_manager.dart';
 import 'package:curso_avanzado_flutter/constants/values_manager.dart';
 import 'package:curso_avanzado_flutter/domain/models/slider_object_model/slider_object_model.dart';
-import 'package:curso_avanzado_flutter/presentation/base/base_view_models.dart';
 import 'package:flutter/material.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-class OnboardingViewModel extends BaseViewModels
-    implements OnBoardingViewModelInputs, OnBoardingViewModelOutputs {
-  // stream controllers
-  final StreamController<SliderViewObject> _streamController = StreamController<SliderViewObject>();
+part 'onboarding_view_model.freezed.dart';
+part 'onboarding_view_model.g.dart';
 
-  int _currentIndex = 0;
+@freezed
+class SliderViewObject with _$SliderViewObject {
+  const factory SliderViewObject({
+    required SliderObjectModel sliderObjectModel,
+    required int numOfSliders,
+    @Default(0) int currentIndex,
+  }) = _SliderViewObject;
 
-  final PageController pageController = PageController();
-
-  List<SliderObjectModel> get sliders => const [
+  static const sliders = [
     SliderObjectModel(
       title: StringsManager.onBoardingTitle1,
       subTitle: StringsManager.onBoardingSubTitle1,
@@ -38,29 +39,38 @@ class OnboardingViewModel extends BaseViewModels
       image: ImageAssets.onboardingLogo4,
     ),
   ];
+}
+
+@riverpod
+class OnboardingViewModel extends _$OnboardingViewModel implements OnBoardingViewModelInputs {
+  // stream controllers
+  
+
+  final PageController pageController = PageController();
 
   @override
-  void dispose() {
-    _streamController.close();
-  }
-
-  @override
-  void start() {
-    // TODO: implement start
-    _postDataToView();
+  SliderViewObject build() {
+    return SliderViewObject(
+      sliderObjectModel: SliderViewObject.sliders[0],
+      numOfSliders: SliderViewObject.sliders.length,
+    );
   }
 
   @override
   void onForward() {
-    _currentIndex++;
-    if (_currentIndex == sliders.length) {
-      _currentIndex = 0;
+    state = state.copyWith(
+      currentIndex: state.currentIndex + 1,
+    );
+    if (state.currentIndex == SliderViewObject.sliders.length) {
+      state = state.copyWith(
+        currentIndex: 0,
+      );
     }
 
     _postDataToView();
 
     pageController.animateToPage(
-      _currentIndex,
+      state.currentIndex,
       duration: const Duration(milliseconds: DurationConstant.d300),
       curve: Curves.easeIn,
     );
@@ -68,41 +78,36 @@ class OnboardingViewModel extends BaseViewModels
 
   @override
   void onPageChanged(int index) {
-    _currentIndex = index;
+    state = state.copyWith(
+      currentIndex: index,
+    );
     _postDataToView();
   }
 
   @override
   void onReverse() {
-    _currentIndex--;
-    if (_currentIndex == -1) {
-      _currentIndex = sliders.length - 1;
+    state = state.copyWith(
+      currentIndex: state.currentIndex - 1,
+    );
+    if (state.currentIndex == -1) {
+      state = state.copyWith(
+        currentIndex: SliderViewObject.sliders.length - 1,
+      );
     }
 
     _postDataToView();
 
     pageController.animateToPage(
-      _currentIndex,
+      state.currentIndex,
       duration: const Duration(milliseconds: DurationConstant.d300),
       curve: Curves.easeIn,
     );
   }
 
-  @override
-  Sink<SliderViewObject> get inputSliderViewObject => _streamController.sink;
-
-  @override
-  Stream<SliderViewObject> get outputSliderViewObject =>
-      _streamController.stream.map((sliderViewObject) => sliderViewObject);
-
   // private functions to handle the logic
   void _postDataToView() {
-    inputSliderViewObject.add(
-      SliderViewObject(
-        sliderObjectModel: sliders[_currentIndex],
-        numOfSliders: sliders.length,
-        currentIndex: _currentIndex,
-      ),
+    state = state.copyWith(
+      sliderObjectModel: SliderViewObject.sliders[state.currentIndex],
     );
   }
 }
@@ -112,24 +117,4 @@ abstract class OnBoardingViewModelInputs {
   void onForward(); // when user clicks on right arrow or swipe
   void onReverse(); // when user clicks on left arrow or swipe
   void onPageChanged(int index); // when user swipes
-
-  Sink<SliderViewObject> get inputSliderViewObject; // this is the way to add data to our stream .. stream input
-}
-
-// outputs mean the data or results that will be sent from our view model to our view
-abstract class OnBoardingViewModelOutputs {
-  Stream<SliderViewObject>
-      get outputSliderViewObject; // this is the way to get data from our stream .. stream output
-}
-
-class SliderViewObject {
-  SliderObjectModel sliderObjectModel;
-  int numOfSliders;
-  int currentIndex;
-
-  SliderViewObject({
-    required this.sliderObjectModel,
-    required this.numOfSliders,
-    required this.currentIndex,
-  });
 }
