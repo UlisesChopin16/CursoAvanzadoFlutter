@@ -1,110 +1,84 @@
-import 'dart:async';
-
+import 'package:curso_avanzado_flutter/app/di.dart';
 import 'package:curso_avanzado_flutter/domain/usecase/login_use_case.dart';
-import 'package:curso_avanzado_flutter/presentation/base/base_view_models.dart';
 import 'package:curso_avanzado_flutter/presentation/common/state_render_impl.dart';
 import 'package:curso_avanzado_flutter/presentation/common/state_renderer.dart';
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'login_view_model.freezed.dart';
+part 'login_view_model.g.dart';
 
 @freezed
 class LoginObject with _$LoginObject {
   const factory LoginObject({
-    required String userName,
-    required String password,
+    @Default('') String userName,
+    @Default('') String password,
+    @Default(true) bool isUserNameValid,
+    @Default(true) bool isPasswordValid,
+    @Default(false) bool isAllInputsValid,
+    @Default(null) FlowState? flowState,
   }) = _LoginObject;
 }
 
-class LoginViewModel extends BaseViewModels implements LoginViewModelInputs, LoginViewModelOutputs {
-  StreamController<String> userNameController = StreamController<String>.broadcast();
-  StreamController<String> passwordController = StreamController<String>.broadcast();
-  
-  StreamController<void> isAllInputsValidController = StreamController<void>.broadcast();
+@riverpod
+class LoginViewModel extends _$LoginViewModel implements LoginViewModelInputs {
+  final LoginUseCase _loginUseCase = instance<LoginUseCase>();
 
-  StreamController<bool> isUserLoggedInController = StreamController<bool>.broadcast();
-
-  var loginObject = const LoginObject(
-    userName: '',
-    password: '',
-  );
-
-  LoginUseCase loginUseCase;
-
-  LoginViewModel({required this.loginUseCase});
-
-  // inputs
   @override
-  void dispose() {
-    userNameController.close();
-    passwordController.close();
-    isAllInputsValidController.close();
-    isUserLoggedInController.close();
+  LoginObject build() {
+    return const LoginObject();
   }
 
   @override
-  void start() {
-    // view tells state renderer, please show the content of the screen
-    inputFlowState.add(ContentState());
-  }
-
-  @override
-  void login() async {
-    inputFlowState.add(LoadingState(stateRendererType: StateRendererType.POPUP_LOADING_STATE));
-    (await loginUseCase.execute(
-      LoginUseCaseInput(
-        email: loginObject.userName,
-        password: loginObject.password,
+  void login({required VoidCallback onDone}) async {
+    state = state.copyWith(
+      flowState: LoadingState(
+        stateRendererType: StateRendererType.POPUP_LOADING_STATE,
       ),
-    ))
-        .fold((failure) {
-      inputFlowState.add(
-        ErrorState(
-          stateRendererType: StateRendererType.POPUP_ERROR_STATE,
-          message: failure.message,
-        ),
-      );
-    }, (data) {
-      inputFlowState.add(ContentState());
-      isUserLoggedInController.add(true);
-    });
+    );
+    final response = await _loginUseCase.execute(
+      LoginUseCaseInput(
+        email: state.userName,
+        password: state.password,
+      ),
+    );
+
+    response.fold(
+      (failure) {
+        state = state.copyWith(
+          flowState: ErrorState(
+            stateRendererType: StateRendererType.POPUP_ERROR_STATE,
+            message: failure.message,
+          ),
+        );
+      },
+      (loginResponseModel) {
+        state = state.copyWith(
+          flowState: ContentState(),
+        );
+        onDone();
+      },
+    );
   }
 
   @override
   void setPassword(String password) {
-    inputPassword.add(password);
-    loginObject = loginObject.copyWith(password: password); // data class operation same as kotlin
+    state = state.copyWith(
+      password: password,
+      isPasswordValid: _isPasswordValid(password),
+    ); // data class operation same as kotlin
     _validate();
   }
 
   @override
   void setUserName(String userName) {
-    inputUserName.add(userName);
-    loginObject = loginObject.copyWith(userName: userName); // data class operation same as kotlin
+    state = state.copyWith(
+      userName: userName,
+      isUserNameValid: _isUserNameValid(userName),
+    );
     _validate();
   }
-
-  @override
-  Sink<String> get inputUserName => userNameController.sink;
-
-  @override
-  Sink<String> get inputPassword => passwordController.sink;
-
-  @override
-  Sink<void> get inputIsAllInputsValid => isAllInputsValidController.sink;
-
-  // outputs
-  @override
-  Stream<bool> get outputIsPasswordValid =>
-      passwordController.stream.map((password) => _isPasswordValid(password));
-
-  @override
-  Stream<bool> get outputIsUserNameValid =>
-      userNameController.stream.map((user) => _isUserNameValid(user));
-
-  @override
-  Stream<bool> get outputIsAllInputsValid =>
-      isAllInputsValidController.stream.map((_) => _isAllInputsValid());
 
   // private methods
   bool _isPasswordValid(String password) {
@@ -131,15 +105,19 @@ class LoginViewModel extends BaseViewModels implements LoginViewModelInputs, Log
   }
 
   bool _isAllInputsValid() {
-    return _isPasswordValid(loginObject.password) && _isUserNameValid(loginObject.userName);
+    return _isPasswordValid(state.password) && _isUserNameValid(state.userName);
   }
 
   void _validate() {
-    inputIsAllInputsValid.add(null);
+    state = state.copyWith(
+      isAllInputsValid: _isAllInputsValid(),
+    );
   }
 
-  void retry() {
-    inputFlowState.add(ContentState());
+  void retryAction() {
+    state = state.copyWith(
+      flowState: ContentState(),
+    );
   }
 }
 
@@ -147,17 +125,5 @@ abstract class LoginViewModelInputs {
   // three functions
   void setUserName(String userName);
   void setPassword(String password);
-  void login();
-
-  // two sinks
-  Sink<String> get inputUserName;
-  Sink<String> get inputPassword;
-  Sink<void> get inputIsAllInputsValid;
-}
-
-abstract class LoginViewModelOutputs {
-  // two streams
-  Stream<bool> get outputIsUserNameValid;
-  Stream<bool> get outputIsPasswordValid;
-  Stream<bool> get outputIsAllInputsValid;
+  void login({required VoidCallback onDone});
 }

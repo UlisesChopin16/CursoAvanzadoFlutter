@@ -126,7 +126,8 @@ extension FlowStateExtension on FlowState {
   bool _isThereCurrentDialogShowing(BuildContext context) =>
       ModalRoute.of(context)?.isCurrent != true;
 
-  void showPopUp(BuildContext context, StateRendererType stateRendererType, String message, Function? retryActionFunction) {
+  void showPopUp(BuildContext context, StateRendererType stateRendererType, String message,
+      Function? retryActionFunction) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       showDialog<void>(
         context: context,

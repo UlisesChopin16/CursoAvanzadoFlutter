@@ -1,29 +1,29 @@
-import 'dart:async';
 import 'package:curso_avanzado_flutter/presentation/common/state_render_impl.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-abstract class BaseViewModels implements BaseViewModelInputs, BaseViewModelOutputs {
-  // shared variables and functions thah will be used throughout any view model
-  StreamController<FlowState> flowStateController = StreamController<FlowState>.broadcast();
+part 'base_view_models.freezed.dart';
+part 'base_view_models.g.dart';
+
+@freezed
+class FlowStateModel with _$FlowStateModel {
+  const factory FlowStateModel({
+    @Default(null) FlowState? flowState,
+  }) = _FlowStateModel;
+}
+
+@riverpod
+class BaseViewModels extends _$BaseViewModels {
 
   @override
-  Sink<FlowState> get inputFlowState => flowStateController.sink;
-
-  @override
-  Stream<FlowState> get outputFlowState => flowStateController.stream.map((flowState) => flowState);
-
-  @override
-  void dispose() {
-    flowStateController.close();
+  FlowStateModel build() {
+    return const FlowStateModel();
   }
-}
 
-abstract class BaseViewModelInputs {
-  void start(); // will be called while init of view model
-  void dispose(); // will be called while disposing of view model
+  void changeFlowState(FlowState flowState) {
+    state = state.copyWith(flowState: flowState);
+  }
 
-  Sink<FlowState> get inputFlowState;
-}
-
-abstract class BaseViewModelOutputs {
-  Stream<FlowState> get outputFlowState;
+  // shared variables and functions thah will be used throughout any view model
+  // StreamController<FlowState> flowStateController = StreamController<FlowState>.broadcast();
 }

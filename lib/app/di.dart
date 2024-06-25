@@ -6,7 +6,6 @@ import 'package:curso_avanzado_flutter/data/network/network_info/network_info.da
 import 'package:curso_avanzado_flutter/data/repository_impl/repository_impl.dart';
 import 'package:curso_avanzado_flutter/domain/repository/repository.dart';
 import 'package:curso_avanzado_flutter/domain/usecase/login_use_case.dart';
-import 'package:curso_avanzado_flutter/presentation/Views/login/login_view_model.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -63,8 +62,8 @@ void initLoginModule() {
     );
 
     // login view model
-    instance.registerFactory<LoginViewModel>(
-      () => LoginViewModel(loginUseCase: instance()),
-    );
+    // instance.registerFactory<LoginViewModel>(
+    //   () => LoginViewModel(loginUseCase: instance()),
+    // );
   }
 }
