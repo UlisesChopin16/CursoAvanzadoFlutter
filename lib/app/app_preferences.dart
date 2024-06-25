@@ -46,10 +46,10 @@ class AppPreferences {
   }
 
   Future<void> setOnBoardingScreenViewed() async {
-    _sharedPreferences.setBool(PREFS_KEY_ONBOARDING_SCREEN, true);
+    await _sharedPreferences.setBool(PREFS_KEY_ONBOARDING_SCREEN, true);
   }
 
-  Future<bool> isOnBoardingScreenViewed() async {
+  bool isOnBoardingScreenViewed() {
     return _sharedPreferences.getBool(PREFS_KEY_ONBOARDING_SCREEN) ?? false;
   }
 
@@ -62,10 +62,10 @@ class AppPreferences {
   }
 
   Future<void> setIsUserLoggedIn() async {
-    _sharedPreferences.setBool(PREFS_KEY_IS_USER_LOGGED_IN, true);
+    await _sharedPreferences.setBool(PREFS_KEY_IS_USER_LOGGED_IN, true);
   }
 
-  Future<bool> isUserLoggedIn() async {
+  bool isUserLoggedIn() {
     return _sharedPreferences.getBool(PREFS_KEY_IS_USER_LOGGED_IN) ?? false;
   }
 

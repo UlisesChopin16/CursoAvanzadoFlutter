@@ -1,3 +1,4 @@
+import 'package:curso_avanzado_flutter/app/app_preferences.dart';
 import 'package:curso_avanzado_flutter/app/di.dart';
 import 'package:curso_avanzado_flutter/domain/usecase/login_use_case.dart';
 import 'package:curso_avanzado_flutter/presentation/common/state_render_impl.dart';
@@ -17,6 +18,7 @@ class LoginObject with _$LoginObject {
     @Default(true) bool isUserNameValid,
     @Default(true) bool isPasswordValid,
     @Default(false) bool isAllInputsValid,
+    @Default(false) bool isUserLoggedIn,
     @Default(null) FlowState? flowState,
   }) = _LoginObject;
 }
@@ -24,6 +26,7 @@ class LoginObject with _$LoginObject {
 @riverpod
 class LoginViewModel extends _$LoginViewModel implements LoginViewModelInputs {
   final LoginUseCase _loginUseCase = instance<LoginUseCase>();
+  final AppPreferences _appPreferences = instance<AppPreferences>();
 
   @override
   LoginObject build() {
@@ -56,7 +59,11 @@ class LoginViewModel extends _$LoginViewModel implements LoginViewModelInputs {
       (loginResponseModel) {
         state = state.copyWith(
           flowState: ContentState(),
+          isUserLoggedIn: true,
         );
+        _appPreferences.setIsUserLoggedIn()
+        
+        ;
         onDone();
       },
     );
