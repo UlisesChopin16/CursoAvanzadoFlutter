@@ -1,16 +1,16 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import "package:freezed_annotation/freezed_annotation.dart";
 
-part 'login_response.g.dart';
+part "login_response.g.dart";
 
 @JsonSerializable()
 class LoginResponse {
-  @JsonKey(name: 'status')
+  @JsonKey(name: "status")
   final int? status;
-  @JsonKey(name: 'message')
+  @JsonKey(name: "message")
   final String? message;
-  @JsonKey(name: 'customer')
+  @JsonKey(name: "customer")
   final CustomerResponse? customer;
-  @JsonKey(name: 'contacts')
+  @JsonKey(name: "contacts")
   final ContactResponse? contacts;
 
   const LoginResponse({
@@ -28,15 +28,15 @@ class LoginResponse {
 
 @JsonSerializable()
 class CustomerResponse {
-  @JsonKey(name: 'id')
+  @JsonKey(name: "id")
   final String? id;
-  @JsonKey(name: 'name')
+  @JsonKey(name: "name")
   final String? name;
-  @JsonKey(name: 'apellido_p')
+  @JsonKey(name: "apellido_p")
   final String? apellidoP;
-  @JsonKey(name: 'apellido_m')
+  @JsonKey(name: "apellido_m")
   final String? apellidoM;
-  @JsonKey(name: 'numOfNotifications')
+  @JsonKey(name: "numOfNotifications")
   final int? numOfNotifications;
 
   const CustomerResponse({
@@ -55,13 +55,13 @@ class CustomerResponse {
 
 @JsonSerializable()
 class ContactResponse {
-  @JsonKey(name: 'phone')
+  @JsonKey(name: "phone")
   final String? phone;
-  @JsonKey(name: 'web_site')
+  @JsonKey(name: "web_site")
   final String? webSite;
-  @JsonKey(name: 'email')
+  @JsonKey(name: "email")
   final String? email;
-  @JsonKey(name: 'github')
+  @JsonKey(name: "github")
   final String? github;
 
   const ContactResponse({

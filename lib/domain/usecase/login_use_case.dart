@@ -18,7 +18,7 @@ class LoginUseCase implements BaseUseCase<LoginUseCaseInput, LoginResponseModel>
     DeviceInfo deviceInfo = await getDeviceInfo();
 
     // then we call the repository to login the customer
-    return await repository.loginCustomer(
+    final response = await repository.loginCustomerRepository(
       LoginRequest(
         email: input.email,
         password: input.password,
@@ -26,6 +26,8 @@ class LoginUseCase implements BaseUseCase<LoginUseCaseInput, LoginResponseModel>
         deviceName: deviceInfo.name,
       ),
     );
+
+    return response;
   }
 }
 

@@ -4,5 +4,5 @@ import 'package:curso_avanzado_flutter/domain/models/login_response_model/login_
 import 'package:dartz/dartz.dart';
 
 abstract class Repository {
-  Future<Either<Failure, LoginResponseModel>> loginCustomer(LoginRequest loginResponse);
+  Future<Either<Failure, LoginResponseModel>> loginCustomerRepository(LoginRequest loginResponse);
 }

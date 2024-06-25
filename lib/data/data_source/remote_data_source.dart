@@ -1,9 +1,10 @@
+import 'package:curso_avanzado_flutter/app/extensions.dart';
 import 'package:curso_avanzado_flutter/data/network/apis/app_api.dart';
 import 'package:curso_avanzado_flutter/data/request/request.dart';
 import 'package:curso_avanzado_flutter/data/responses/login_response/login_response.dart';
 
 abstract class RemoteDataSource {
-  Future<LoginResponse> loginCustomer(LoginRequest loginRequest);
+  Future<LoginResponse> loginCustomerRDS(LoginRequest loginRequest);
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
@@ -14,7 +15,9 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   );
 
   @override
-  Future<LoginResponse> loginCustomer(LoginRequest loginRequest) async {
-    return await appApi.loginCustomer(loginRequest.toJson());
+  Future<LoginResponse> loginCustomerRDS(LoginRequest loginRequest) async {
+    final response = await appApi.loginCustomer(loginRequest.toJson()).toMap();
+    final LoginResponse loginResponse = LoginResponse.fromJson(response);
+    return loginResponse;
   }
 }

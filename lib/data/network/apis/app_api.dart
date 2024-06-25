@@ -12,7 +12,7 @@ abstract class AppApi {
   factory AppApi(Dio dio, {String baseUrl}) = _AppApi;
 
   @POST(login)
-  Future<LoginResponse> loginCustomer(
+  Future<String> loginCustomer(
     @Body() Map<String, dynamic> body,
   );
 }

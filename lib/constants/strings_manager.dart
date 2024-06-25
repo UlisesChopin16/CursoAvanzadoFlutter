@@ -18,8 +18,8 @@ class StringsManager {
   static const String login = "Login";
   static const String forgetPassword = "I forget my password";
   static const String registerText = "Not a member yet? Register now";
-  static const String loading = "loading";
-  static const String retryAgain = "retry_again";
+  static const String loading = "Loading...";
+  static const String retryAgain = "Retry again";
   static const String ok = "ok";
   static const String emailHint = 'email_hint';
   static const String invalidEmail = "invalid_email";
@@ -54,7 +54,7 @@ class StringsManager {
   static const String internalServerError = "internal_server_error";
   static const String unknownError = "unknown_error";
   static const String timeoutError = "timeout_error";
-  static const String defaultError = "default_error";
+  static const String defaultError = "Something went wrong";
   static const String cacheError = "cache_error";
   static const String noInternetError = "no_internet_error";
 }

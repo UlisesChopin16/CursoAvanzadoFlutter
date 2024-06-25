@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:curso_avanzado_flutter/domain/usecase/login_use_case.dart';
 import 'package:curso_avanzado_flutter/presentation/base/base_view_models.dart';
+import 'package:curso_avanzado_flutter/presentation/common/state_render_impl.dart';
+import 'package:curso_avanzado_flutter/presentation/common/state_renderer.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'login_view_model.freezed.dart';
@@ -38,10 +40,14 @@ class LoginViewModel extends BaseViewModels implements LoginViewModelInputs, Log
   }
 
   @override
-  void start() {}
+  void start() {
+    // view tells state renderer, please show the content of the screen
+    inputFlowState.add(ContentState());
+  }
 
   @override
   void login() async {
+    inputFlowState.add(LoadingState(stateRendererType: StateRendererType.POPUP_LOADING_STATE));
     (await loginUseCase.execute(
       LoginUseCaseInput(
         email: loginObject.userName,
@@ -49,9 +55,14 @@ class LoginViewModel extends BaseViewModels implements LoginViewModelInputs, Log
       ),
     ))
         .fold((failure) {
-      print(failure.message);
+      inputFlowState.add(
+        ErrorState(
+          stateRendererType: StateRendererType.POPUP_ERROR_STATE,
+          message: failure.message,
+        ),
+      );
     }, (data) {
-      print(data.customer.name);
+      inputFlowState.add(ContentState());
     });
   }
 
@@ -74,10 +85,9 @@ class LoginViewModel extends BaseViewModels implements LoginViewModelInputs, Log
 
   @override
   Sink<String> get inputPassword => passwordController.sink;
-  
+
   @override
   Sink<void> get inputIsAllInputsValid => isAllInputsValidController.sink;
-
 
   // outputs
   @override
@@ -89,8 +99,8 @@ class LoginViewModel extends BaseViewModels implements LoginViewModelInputs, Log
       userNameController.stream.map((user) => _isUserNameValid(user));
 
   @override
-  Stream<bool> get outputIsAllInputsValid => isAllInputsValidController.stream.map((_) => _isAllInputsValid());
-
+  Stream<bool> get outputIsAllInputsValid =>
+      isAllInputsValidController.stream.map((_) => _isAllInputsValid());
 
   // private methods
   bool _isPasswordValid(String password) {
@@ -120,7 +130,7 @@ class LoginViewModel extends BaseViewModels implements LoginViewModelInputs, Log
     return _isPasswordValid(loginObject.password) && _isUserNameValid(loginObject.userName);
   }
 
-  void _validate () {
+  void _validate() {
     inputIsAllInputsValid.add(null);
   }
 }

@@ -4,6 +4,7 @@ import 'package:curso_avanzado_flutter/data/network/error_handler.dart';
 import 'package:curso_avanzado_flutter/data/network/failures/failure.dart';
 import 'package:curso_avanzado_flutter/data/network/network_info/network_info.dart';
 import 'package:curso_avanzado_flutter/data/request/request.dart';
+import 'package:curso_avanzado_flutter/data/responses/login_response/login_response.dart';
 import 'package:curso_avanzado_flutter/domain/models/login_response_model/login_response_model.dart';
 import 'package:curso_avanzado_flutter/domain/repository/repository.dart';
 import 'package:dartz/dartz.dart';
@@ -18,7 +19,9 @@ class RepositoryImpl implements Repository {
   );
 
   @override
-  Future<Either<Failure, LoginResponseModel>> loginCustomer(LoginRequest loginResponse) async {
+  Future<Either<Failure, LoginResponseModel>> loginCustomerRepository(
+      LoginRequest loginRequest) async {
+    LoginResponse response = const LoginResponse();
     try {
       final bool isConnected = await networkInfo.isConnected;
       if (!isConnected) {
@@ -30,7 +33,9 @@ class RepositoryImpl implements Repository {
           ),
         );
       }
-      final response = await remoteDataSource.loginCustomer(loginResponse);
+      
+      response = await remoteDataSource.loginCustomerRDS(loginRequest);
+
       if (response.status != 200) {
         // return error
         return Left(

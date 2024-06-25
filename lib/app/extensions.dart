@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 const empty = '';
 const zero = 0;
 
@@ -16,5 +18,17 @@ extension NonNullInt on int? {
   /// This extension is used to return 0 if the value is null
   int orZero() {
     return this ?? zero;
+  }
+}
+
+extension ToJson on Future<String> {
+  /// This extension is used to convert a string to a json object
+  Future<Map<String, dynamic>> toMap() async {
+    // get the data from the future
+    final String data = await this;
+    // decode the data to a map
+    final map = jsonDecode(data) as Map<String, dynamic>;
+    // return the map
+    return map;
   }
 }

@@ -11,7 +11,6 @@ class Test extends StatelessWidget {
 
   void getAppState() {
     // get the state
-    print(MyApp.instance.appState);
   }
 
   @override
