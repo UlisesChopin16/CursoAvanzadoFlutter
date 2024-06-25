@@ -8,6 +8,7 @@ import 'package:curso_avanzado_flutter/presentation/common/state_render_impl.dar
 import 'package:curso_avanzado_flutter/presentation/components/text_button_component.dart';
 import 'package:curso_avanzado_flutter/presentation/routes/routes_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:gap/gap.dart';
 
 class LoginView extends StatefulWidget {
@@ -32,6 +33,14 @@ class _LoginViewState extends State<LoginView> {
     });
     passwordController.addListener(() {
       loginViewModel.setPassword(passwordController.text);
+    });
+
+    loginViewModel.isUserLoggedInController.stream.listen((isLoggedIn) {
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        if (isLoggedIn) {
+          Navigator.of(context).pushReplacementNamed(Routes.mainRoute);
+        }
+      });
     });
   }
 
@@ -66,10 +75,7 @@ class _LoginViewState extends State<LoginView> {
                   userNameController: userNameController,
                   passwordController: passwordController,
                 ),
-                () {
-                  Navigator.of(context).pop(true);
-                  loginViewModel.login();
-                },
+                loginViewModel.retry,                
               ) ??
               ViewLogin(
                 formKey: formKey,

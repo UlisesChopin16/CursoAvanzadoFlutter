@@ -60,6 +60,7 @@ class StateRenderer extends StatelessWidget {
             RetryButton(
               stateRendererType: stateRendererType,
               retryActionFunction: retryActionFunction,
+              buttonTitle: StringsManager.ok,
             ),
           ],
         );
@@ -72,6 +73,7 @@ class StateRenderer extends StatelessWidget {
             RetryButton(
               stateRendererType: stateRendererType,
               retryActionFunction: retryActionFunction,
+              buttonTitle: StringsManager.ok,
             )
           ],
         );
@@ -135,9 +137,10 @@ class RetryButton extends StatelessWidget {
     super.key,
     required this.stateRendererType,
     required this.retryActionFunction,
+    this.buttonTitle = StringsManager.retryAgain,
   });
 
-  final String buttonTitle = StringsManager.retryAgain;
+  final String buttonTitle;
   final StateRendererType stateRendererType;
   final Function? retryActionFunction;
 
@@ -157,7 +160,10 @@ class RetryButton extends StatelessWidget {
                 Navigator.of(context).pop(); // popup state error so we need to dismiss the dialog
               }
             },
-            child: Text(buttonTitle),
+            child: Text(
+              buttonTitle,
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
           ),
         ),
       ),

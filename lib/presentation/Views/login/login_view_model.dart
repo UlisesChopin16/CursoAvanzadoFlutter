@@ -19,8 +19,10 @@ class LoginObject with _$LoginObject {
 class LoginViewModel extends BaseViewModels implements LoginViewModelInputs, LoginViewModelOutputs {
   StreamController<String> userNameController = StreamController<String>.broadcast();
   StreamController<String> passwordController = StreamController<String>.broadcast();
-
+  
   StreamController<void> isAllInputsValidController = StreamController<void>.broadcast();
+
+  StreamController<bool> isUserLoggedInController = StreamController<bool>.broadcast();
 
   var loginObject = const LoginObject(
     userName: '',
@@ -37,6 +39,7 @@ class LoginViewModel extends BaseViewModels implements LoginViewModelInputs, Log
     userNameController.close();
     passwordController.close();
     isAllInputsValidController.close();
+    isUserLoggedInController.close();
   }
 
   @override
@@ -63,6 +66,7 @@ class LoginViewModel extends BaseViewModels implements LoginViewModelInputs, Log
       );
     }, (data) {
       inputFlowState.add(ContentState());
+      isUserLoggedInController.add(true);
     });
   }
 
@@ -132,6 +136,10 @@ class LoginViewModel extends BaseViewModels implements LoginViewModelInputs, Log
 
   void _validate() {
     inputIsAllInputsValid.add(null);
+  }
+
+  void retry() {
+    inputFlowState.add(ContentState());
   }
 }
 
