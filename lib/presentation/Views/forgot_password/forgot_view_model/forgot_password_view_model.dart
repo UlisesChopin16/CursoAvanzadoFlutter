@@ -2,6 +2,7 @@ import 'package:curso_avanzado_flutter/app/di.dart';
 import 'package:curso_avanzado_flutter/domain/usecase/forgot_password_use_case.dart';
 import 'package:curso_avanzado_flutter/presentation/common/state_render_impl.dart';
 import 'package:curso_avanzado_flutter/presentation/common/state_renderer.dart';
+import 'package:curso_avanzado_flutter/presentation/validations/validations.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -31,7 +32,7 @@ class ForgotPasswordViewModel extends _$ForgotPasswordViewModel implements Forgo
   @override
   void onEmailChanged(String email) {
     state = state.copyWith(
-      email: email,
+      email: email.trim(),
     );
     _validate();
   }
@@ -81,14 +82,12 @@ class ForgotPasswordViewModel extends _$ForgotPasswordViewModel implements Forgo
   // method to validate the email its an email
   void _validate() {
     state = state.copyWith(
-      isEmailValid: _isEmailValid(state.email),
-      isAllInputsValid: _isEmailValid(state.email),
+      isEmailValid: Validations.isEmailValid(state.email),
+      isAllInputsValid: Validations.isEmailValid(state.email),
     );
   }
 
-  bool _isEmailValid(String email) {
-    return RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(email);
-  }
+  
 }
 
 abstract class ForgotPasswordViewModelInputs {

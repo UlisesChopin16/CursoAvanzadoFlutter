@@ -10,7 +10,7 @@ class StringsManager {
   static const String onBoardingSubTitle3 = "on_boarding_desc3";
   static const String onBoardingSubTitle4 = "on_boarding_desc4";
   static const String skip = "skip";
-  static const String username = "Email";
+  static const String username = "Username";
   static const String mobileNumber = "mobile_number_hint";
   static const String usernameError = "User name is wrong";
   static const String passwordError = "Password is wrong";

@@ -3,6 +3,7 @@ import 'package:curso_avanzado_flutter/app/di.dart';
 import 'package:curso_avanzado_flutter/domain/usecase/login_use_case.dart';
 import 'package:curso_avanzado_flutter/presentation/common/state_render_impl.dart';
 import 'package:curso_avanzado_flutter/presentation/common/state_renderer.dart';
+import 'package:curso_avanzado_flutter/presentation/validations/validations.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -74,8 +75,8 @@ class LoginViewModel extends _$LoginViewModel implements LoginViewModelInputs {
   @override
   void setPassword(String password) {
     state = state.copyWith(
-      password: password,
-      isPasswordValid: _isPasswordValid(password),
+      password: password.trim(),
+      isPasswordValid: Validations.isPasswordValid(password),
     ); // data class operation same as kotlin
     _validate();
   }
@@ -83,38 +84,19 @@ class LoginViewModel extends _$LoginViewModel implements LoginViewModelInputs {
   @override
   void setUserName(String userName) {
     state = state.copyWith(
-      userName: userName,
-      isUserNameValid: _isUserNameValid(userName),
+      userName: userName.trim(),
+      isUserNameValid: Validations.isUserNameValid(userName),
     );
     _validate();
   }
 
   // private methods
-  bool _isPasswordValid(String password) {
-    if (password.length < 6) {
-      return false;
-    }
-    if (password.trim().isEmpty) {
-      return false;
-    }
-    if (password.contains(' ')) {
-      return false;
-    }
-    return true;
-  }
+  
 
-  bool _isUserNameValid(String userName) {
-    if (userName.trim().isEmpty) {
-      return false;
-    }
-    if (userName.contains(' ')) {
-      return false;
-    }
-    return true;
-  }
+  
 
   bool _isAllInputsValid() {
-    return _isPasswordValid(state.password) && _isUserNameValid(state.userName);
+    return Validations.isPasswordValid(state.password) && Validations.isUserNameValid(state.userName);
   }
 
   void _validate() {
