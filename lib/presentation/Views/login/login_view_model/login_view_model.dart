@@ -58,12 +58,14 @@ class LoginViewModel extends _$LoginViewModel implements LoginViewModelInputs {
       },
       (loginResponseModel) {
         state = state.copyWith(
-          flowState: ContentState(),
+          flowState: SuccessState(
+            stateRendererType: StateRendererType.POPUP_SUCCESS,
+            title: 'Success',
+            message: 'You have successfully logged in.',
+          ),
           isUserLoggedIn: true,
         );
-        _appPreferences.setIsUserLoggedIn()
-        
-        ;
+        _appPreferences.setIsUserLoggedIn();
         onDone();
       },
     );
@@ -134,3 +136,21 @@ abstract class LoginViewModelInputs {
   void setPassword(String password);
   void login({required VoidCallback onDone});
 }
+
+/* 
+  // register user request
+  {
+    "country_mobile_code": "+52",
+    "user_name": "hola",
+    "email": "hola@gmail.com",
+    "password": "123456",
+    "mobile_number": "7341261416",
+    "profile_picture": 
+  }
+
+  // response
+  {
+  "status": 200,
+  "message": "You have successfully registered.",
+}
+*/ 
