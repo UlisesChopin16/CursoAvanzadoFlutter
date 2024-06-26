@@ -5,7 +5,7 @@ import 'package:curso_avanzado_flutter/constants/font_manager.dart';
 import 'package:curso_avanzado_flutter/constants/strings_manager.dart';
 import 'package:curso_avanzado_flutter/constants/styles_manager.dart';
 import 'package:curso_avanzado_flutter/constants/values_manager.dart';
-import 'package:curso_avanzado_flutter/data/mapper/mapper.dart';
+import 'package:curso_avanzado_flutter/data/mapper/customer_mapper.dart';
 import 'package:curso_avanzado_flutter/data/network/failures/failure.dart';
 import 'package:curso_avanzado_flutter/presentation/components/animated_image_component.dart';
 import 'package:curso_avanzado_flutter/presentation/components/dialog_component.dart';
@@ -47,9 +47,10 @@ class StateRenderer extends StatelessWidget {
   Widget _getStateWidget(BuildContext context) {
     switch (stateRendererType) {
       case StateRendererType.POPUP_LOADING_STATE:
-        return const DialogComponent(
+        return DialogComponent(
           children: [
-            AnimatedImageComponent(animationName: JsonAssets.loading),
+            const AnimatedImageComponent(animationName: JsonAssets.loading),
+            _getMessage(message),
           ],
         );
       case StateRendererType.POPUP_ERROR_STATE:

@@ -1,10 +1,11 @@
 import 'package:curso_avanzado_flutter/app/app_preferences.dart';
 import 'package:curso_avanzado_flutter/data/data_source/remote_data_source.dart';
-import 'package:curso_avanzado_flutter/data/network/apis/app_api.dart';
+import 'package:curso_avanzado_flutter/data/network/apis/customer_apis/customer_app_api.dart';
 import 'package:curso_avanzado_flutter/data/network/dio_factory.dart';
 import 'package:curso_avanzado_flutter/data/network/network_info/network_info.dart';
 import 'package:curso_avanzado_flutter/data/repository_impl/repository_impl.dart';
 import 'package:curso_avanzado_flutter/domain/repository/repository.dart';
+import 'package:curso_avanzado_flutter/domain/usecase/forgot_password_use_case.dart';
 import 'package:curso_avanzado_flutter/domain/usecase/login_use_case.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -36,8 +37,8 @@ Future<void> initAppModule() async {
 
   // App service client
   final dio = await instance<DioFactory>().getDio();
-  instance.registerLazySingleton<AppApi>(
-    () => AppApi(dio),
+  instance.registerLazySingleton<CustomerAppApi>(
+    () => CustomerAppApi(dio),
   );
 
   // remote data source
@@ -64,6 +65,20 @@ void initLoginModule() {
     // login view model
     // instance.registerFactory<LoginViewModel>(
     //   () => LoginViewModel(loginUseCase: instance()),
+    // );
+  }
+}
+
+void initForgotPasswordModule() {
+  if (!GetIt.I.isRegistered<ForgotPasswordUseCase>()) {
+    // Register your dependencies here
+    instance.registerFactory<ForgotPasswordUseCase>(
+      () => ForgotPasswordUseCase(instance()),
+    );
+
+    // forgot password view model
+    // instance.registerFactory<ForgotPasswordViewModel>(
+    //   () => ForgotPasswordViewModel(forgotPasswordUseCase: instance()),
     // );
   }
 }

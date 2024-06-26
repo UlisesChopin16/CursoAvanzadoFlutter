@@ -1,6 +1,6 @@
 import 'package:curso_avanzado_flutter/app/functions.dart';
 import 'package:curso_avanzado_flutter/data/network/failures/failure.dart';
-import 'package:curso_avanzado_flutter/data/request/request.dart';
+import 'package:curso_avanzado_flutter/data/request/login_request.dart';
 import 'package:curso_avanzado_flutter/domain/models/device_info/device_info.dart';
 import 'package:curso_avanzado_flutter/domain/models/login_response_model/login_response_model.dart';
 import 'package:curso_avanzado_flutter/domain/repository/repository.dart';

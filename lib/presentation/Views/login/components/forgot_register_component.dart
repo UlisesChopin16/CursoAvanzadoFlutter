@@ -24,7 +24,7 @@ class ForgotRegisterComponent extends StatelessWidget {
           // FORGOT PASSWORD
           TextButtonComponent(
             onPressed: () {
-              Navigator.pushReplacementNamed(context, Routes.forgotPasswordRoute);
+              Navigator.of(context).pushNamed(Routes.forgotPasswordRoute);
             },
             text: StringsManager.forgetPassword,
           ),
@@ -33,7 +33,7 @@ class ForgotRegisterComponent extends StatelessWidget {
           Flexible(
             child: TextButtonComponent(
               onPressed: () {
-                Navigator.pushReplacementNamed(context, Routes.registerRoute);
+                Navigator.of(context).pushNamed(Routes.registerRoute);
               },
               text: StringsManager.registerText,
             ),

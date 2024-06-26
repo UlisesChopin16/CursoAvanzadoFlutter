@@ -84,7 +84,7 @@ class FormComponent extends HookConsumerWidget {
                   : null,
               child: Text(
                 StringsManager.login,
-                style: Theme.of(context).textTheme.titleMedium,
+                style: Theme.of(context).textTheme.displayMedium,
               ),
             ),
           ),

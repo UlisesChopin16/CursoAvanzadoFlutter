@@ -1,18 +1,23 @@
 import 'package:curso_avanzado_flutter/constants/constants.dart';
-import 'package:curso_avanzado_flutter/data/responses/login_response/login_response.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
 
-part 'app_api.g.dart';
+part 'customer_app_api.g.dart';
 
 @RestApi(baseUrl: Constants.baseUrlCustomers)
-abstract class AppApi {
+abstract class CustomerAppApi {
   static const String login = "/login";
+  static const String forgotpassword = "/forgotpassword";
 
-  factory AppApi(Dio dio, {String baseUrl}) = _AppApi;
+  factory CustomerAppApi(Dio dio, {String baseUrl}) = _CustomerAppApi;
 
   @POST(login)
   Future<String> loginCustomer(
+    @Body() Map<String, dynamic> body,
+  );
+
+  @POST(forgotpassword)
+  Future<String> forgotPassword(
     @Body() Map<String, dynamic> body,
   );
 }

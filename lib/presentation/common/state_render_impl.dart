@@ -1,11 +1,12 @@
 import 'package:curso_avanzado_flutter/constants/strings_manager.dart';
-import 'package:curso_avanzado_flutter/data/mapper/mapper.dart';
+import 'package:curso_avanzado_flutter/data/mapper/customer_mapper.dart';
 import 'package:curso_avanzado_flutter/presentation/common/state_renderer.dart';
 import 'package:flutter/material.dart';
 
 abstract class FlowState {
   StateRendererType getStateRendererType();
   String getMessage();
+  String getTitle() => empty;
 }
 
 class LoadingState extends FlowState {
@@ -22,6 +23,27 @@ class LoadingState extends FlowState {
 
   @override
   String getMessage() => message;
+}
+
+class SuccessState extends FlowState {
+  final StateRendererType stateRendererType;
+  final String message;
+  final String title;
+
+  SuccessState({
+    required this.stateRendererType,
+    required this.message,
+    required this.title,
+  }) : super();
+
+  @override
+  StateRendererType getStateRendererType() => stateRendererType;
+
+  @override
+  String getMessage() => message;
+
+  @override
+  String getTitle() => title;
 }
 
 class ErrorState extends FlowState {
@@ -108,6 +130,26 @@ extension FlowStateExtension on FlowState {
             retryActionFunction: retryActionFunction,
           );
         }
+      case SuccessState:
+        {
+          dismissPopUp(context);
+          if (getStateRendererType() != StateRendererType.POPUP_SUCCESS) {
+            return StateRenderer(
+              stateRendererType: getStateRendererType(),
+              message: getMessage(),
+              retryActionFunction: retryActionFunction,
+              title: getTitle(),
+            );
+          }
+          showPopUp(
+            context,
+            getStateRendererType(),
+            getMessage(),
+            title: getTitle(),
+            retryActionFunction,
+          );
+          return contentScreenWidget;
+        }
       default:
         {
           return contentScreenWidget;
@@ -127,7 +169,8 @@ extension FlowStateExtension on FlowState {
       ModalRoute.of(context)?.isCurrent != true;
 
   void showPopUp(BuildContext context, StateRendererType stateRendererType, String message,
-      Function? retryActionFunction) {
+      Function? retryActionFunction,
+      {String title = empty}) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       showDialog<void>(
         context: context,
@@ -136,6 +179,7 @@ extension FlowStateExtension on FlowState {
             stateRendererType: stateRendererType,
             message: message,
             retryActionFunction: retryActionFunction,
+            title: title,
           );
         },
       );

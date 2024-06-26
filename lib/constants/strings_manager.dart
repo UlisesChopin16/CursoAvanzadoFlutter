@@ -10,7 +10,7 @@ class StringsManager {
   static const String onBoardingSubTitle3 = "on_boarding_desc3";
   static const String onBoardingSubTitle4 = "on_boarding_desc4";
   static const String skip = "skip";
-  static const String username = "User name";
+  static const String username = "Email";
   static const String mobileNumber = "mobile_number_hint";
   static const String usernameError = "User name is wrong";
   static const String passwordError = "Password is wrong";
@@ -21,9 +21,10 @@ class StringsManager {
   static const String loading = "Loading...";
   static const String retryAgain = "Retry again";
   static const String ok = "ok";
-  static const String emailHint = 'email_hint';
-  static const String invalidEmail = "invalid_email";
-  static const String resetPassword = "reset_password";
+  static const String emailHint = 'Email';
+  static const String invalidEmail = "Invalid email";
+  static const String resendEmail = "Don't receive the email? Resend";
+  static const String resetPassword = "Reset Password";
   static const String success = "success";
   static const String profilePicture = "upload_profile_picture";
   static const String photoGalley = "photo_gallery";
