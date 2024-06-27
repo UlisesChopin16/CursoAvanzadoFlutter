@@ -163,7 +163,7 @@ class RetryButton extends StatelessWidget {
             },
             child: Text(
               buttonTitle,
-              style: Theme.of(context).textTheme.titleMedium,
+              style: Theme.of(context).textTheme.displayMedium,
             ),
           ),
         ),

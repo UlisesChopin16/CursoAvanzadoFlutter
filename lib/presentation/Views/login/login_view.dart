@@ -59,7 +59,7 @@ class ViewLogin extends HookConsumerWidget {
                     ),
                     Gap(AppSize.s28),
                     FormComponent(),
-                    Gap(AppSize.s8),
+                    Gap(AppSize.s12),
                     ForgotRegisterComponent(),
                   ],
                 ),

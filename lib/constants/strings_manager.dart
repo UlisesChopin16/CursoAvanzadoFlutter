@@ -11,7 +11,7 @@ class StringsManager {
   static const String onBoardingSubTitle4 = "on_boarding_desc4";
   static const String skip = "skip";
   static const String username = "Username";
-  static const String mobileNumber = "mobile_number_hint";
+  static const String mobileNumber = "Mobile Number";
   static const String usernameError = "User name is wrong";
   static const String passwordError = "Password is wrong";
   static const String password = "Password";
@@ -25,12 +25,12 @@ class StringsManager {
   static const String invalidEmail = "Invalid email";
   static const String resendEmail = "Don't receive the email? Resend";
   static const String resetPassword = "Reset Password";
-  static const String success = "success";
-  static const String profilePicture = "upload_profile_picture";
-  static const String photoGalley = "photo_gallery";
-  static const String photoCamera = "camera";
-  static const String register = "register";
-  static const String haveAccount = "already_have_account";
+  static const String success = "Success";
+  static const String profilePicture = "Upload your profile picture here";
+  static const String photoGallery = "Upload from gallery";
+  static const String photoCamera = "Take a photo";
+  static const String register = "Register now";
+  static const String haveAccount = "Already have an account? Login";
   static const String home = "home";
   static const String notifications = "notification";
   static const String search = "search";
@@ -44,6 +44,7 @@ class StringsManager {
   static const String contactUs = "contact_us";
   static const String inviteYourFriends = "invite_your_friends";
   static const String logout = "logout";
+  static const String invalidMobileNumber = "Invalid mobile number";
 
   // error handler
   static const String badRequestError = "bad_request_error";

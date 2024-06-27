@@ -10,6 +10,7 @@ part 'customer_app_api.g.dart';
 abstract class CustomerAppApi {
   static const String login = "/login";
   static const String forgotpassword = "/forgotpassword";
+  static const String register = "/register";
 
   factory CustomerAppApi(Dio dio, {String baseUrl}) = _CustomerAppApi;
 
@@ -20,6 +21,11 @@ abstract class CustomerAppApi {
 
   @POST(forgotpassword)
   Future<ForgotPasswordResponse> forgotPassword(
+    @Body() Map<String, dynamic> body,
+  );
+
+  @GET(register)
+  Future<LoginResponse> registerCustomer(
     @Body() Map<String, dynamic> body,
   );
 }

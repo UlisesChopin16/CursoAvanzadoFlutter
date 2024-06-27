@@ -63,7 +63,7 @@ class ForgotView extends HookConsumerWidget {
                     ),
                     const Gap(AppSize.s28),
                     const FormComponent(),
-                    const Gap(AppSize.s8),
+                    const Gap(AppSize.s12),
                     TextButtonComponent(
                       onPressed: () {},
                       text: StringsManager.resendEmail,

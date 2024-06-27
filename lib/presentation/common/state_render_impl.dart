@@ -33,7 +33,7 @@ class SuccessState extends FlowState {
   SuccessState({
     required this.stateRendererType,
     required this.message,
-    required this.title,
+    this.title = StringsManager.success,
   }) : super();
 
   @override

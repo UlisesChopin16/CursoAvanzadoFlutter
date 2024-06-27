@@ -1,12 +1,14 @@
 import 'package:curso_avanzado_flutter/data/network/apis/customer_apis/customer_app_api.dart';
 import 'package:curso_avanzado_flutter/data/request/forgot_password_request.dart';
 import 'package:curso_avanzado_flutter/data/request/login_request.dart';
+import 'package:curso_avanzado_flutter/data/request/register_request.dart';
 import 'package:curso_avanzado_flutter/data/responses/forgot_password_response/forgot_password_response.dart';
 import 'package:curso_avanzado_flutter/data/responses/login_response/login_response.dart';
 
 abstract class RemoteDataSource {
   Future<LoginResponse> loginCustomerRDS(LoginRequest loginRequest);
   Future<ForgotPasswordResponse> forgotPasswordRDS(ForgotPasswordRequest forgotPasswordRequest);
+  Future<LoginResponse> registerCustomerRDS(RegisterRequest registerRequest);
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
@@ -26,6 +28,12 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   Future<ForgotPasswordResponse> forgotPasswordRDS(
       ForgotPasswordRequest forgotPasswordRequest) async {
     final response = await customerAppApi.forgotPassword(forgotPasswordRequest.toJson());
+    return response;
+  }
+  
+  @override
+  Future<LoginResponse> registerCustomerRDS(RegisterRequest registerRequest) async {
+    final response = await customerAppApi.registerCustomer(registerRequest.toJson());
     return response;
   }
 }

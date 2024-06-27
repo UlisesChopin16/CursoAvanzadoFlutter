@@ -91,10 +91,6 @@ class LoginViewModel extends _$LoginViewModel implements LoginViewModelInputs {
   }
 
   // private methods
-  
-
-  
-
   bool _isAllInputsValid() {
     return Validations.isPasswordValid(state.password) && Validations.isUserNameValid(state.userName);
   }
