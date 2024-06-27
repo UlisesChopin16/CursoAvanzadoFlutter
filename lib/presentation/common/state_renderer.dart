@@ -7,8 +7,8 @@ import 'package:curso_avanzado_flutter/constants/styles_manager.dart';
 import 'package:curso_avanzado_flutter/constants/values_manager.dart';
 import 'package:curso_avanzado_flutter/data/mapper/customer_mapper.dart';
 import 'package:curso_avanzado_flutter/data/network/failures/failure.dart';
-import 'package:curso_avanzado_flutter/presentation/components/animated_image_component.dart';
-import 'package:curso_avanzado_flutter/presentation/components/dialog_component.dart';
+import 'package:curso_avanzado_flutter/presentation/common/components/animated_image_component.dart';
+import 'package:curso_avanzado_flutter/presentation/common/components/dialog_component.dart';
 import 'package:flutter/material.dart';
 
 enum StateRendererType {

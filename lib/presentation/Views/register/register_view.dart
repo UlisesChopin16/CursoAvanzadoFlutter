@@ -5,7 +5,7 @@ import 'package:curso_avanzado_flutter/constants/styles_manager.dart';
 import 'package:curso_avanzado_flutter/constants/values_manager.dart';
 import 'package:curso_avanzado_flutter/presentation/Views/register/register_view_model/register_view_model.dart';
 import 'package:curso_avanzado_flutter/presentation/common/state_render_impl.dart';
-import 'package:curso_avanzado_flutter/presentation/components/text_button_component.dart';
+import 'package:curso_avanzado_flutter/presentation/common/components/text_button_component.dart';
 import 'package:curso_avanzado_flutter/presentation/hooks/form_hook.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';

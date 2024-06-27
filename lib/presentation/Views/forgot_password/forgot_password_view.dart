@@ -4,7 +4,7 @@ import 'package:curso_avanzado_flutter/constants/strings_manager.dart';
 import 'package:curso_avanzado_flutter/constants/values_manager.dart';
 import 'package:curso_avanzado_flutter/presentation/Views/forgot_password/forgot_view_model/forgot_password_view_model.dart';
 import 'package:curso_avanzado_flutter/presentation/common/state_render_impl.dart';
-import 'package:curso_avanzado_flutter/presentation/components/text_button_component.dart';
+import 'package:curso_avanzado_flutter/presentation/common/components/text_button_component.dart';
 import 'package:curso_avanzado_flutter/presentation/hooks/form_hook.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';

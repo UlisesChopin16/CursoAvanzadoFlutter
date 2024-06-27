@@ -4,7 +4,7 @@ import 'package:curso_avanzado_flutter/constants/strings_manager.dart';
 import 'package:curso_avanzado_flutter/constants/values_manager.dart';
 import 'package:curso_avanzado_flutter/domain/models/slider_object_model/slider_object_model.dart';
 import 'package:curso_avanzado_flutter/presentation/Views/onboarding/onboardin_view_model/onboarding_view_model.dart';
-import 'package:curso_avanzado_flutter/presentation/components/text_button_component.dart';
+import 'package:curso_avanzado_flutter/presentation/common/components/text_button_component.dart';
 import 'package:curso_avanzado_flutter/presentation/routes/routes_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

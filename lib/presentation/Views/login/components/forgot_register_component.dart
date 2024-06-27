@@ -1,6 +1,6 @@
 import 'package:curso_avanzado_flutter/constants/strings_manager.dart';
 import 'package:curso_avanzado_flutter/constants/values_manager.dart';
-import 'package:curso_avanzado_flutter/presentation/components/text_button_component.dart';
+import 'package:curso_avanzado_flutter/presentation/common/components/text_button_component.dart';
 import 'package:curso_avanzado_flutter/presentation/routes/routes_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
