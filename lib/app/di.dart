@@ -6,6 +6,7 @@ import 'package:curso_avanzado_flutter/data/network/network_info/network_info.da
 import 'package:curso_avanzado_flutter/data/repository_impl/repository_impl.dart';
 import 'package:curso_avanzado_flutter/domain/repository/repository.dart';
 import 'package:curso_avanzado_flutter/domain/usecase/forgot_password_use_case.dart';
+import 'package:curso_avanzado_flutter/domain/usecase/home_use_case.dart';
 import 'package:curso_avanzado_flutter/domain/usecase/login_use_case.dart';
 import 'package:curso_avanzado_flutter/domain/usecase/register_use_case.dart';
 import 'package:get_it/get_it.dart';
@@ -82,5 +83,14 @@ void initRegisterModule() {
       () => RegisterUseCase(instance()),
     );
     instance.registerFactory<ImagePicker>(() => ImagePicker());
+  }
+}
+
+void initHomeModule() {
+  // Register your dependencies here
+  if (!GetIt.I.isRegistered<HomeUseCase>()) {
+    instance.registerFactory<HomeUseCase>(
+      () => HomeUseCase(instance()),
+    );
   }
 }

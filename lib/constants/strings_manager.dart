@@ -35,8 +35,8 @@ class StringsManager {
   static const String notifications = "notification";
   static const String search = "search";
   static const String settings = "settings";
-  static const String services = "services";
-  static const String stores = "stores";
+  static const String services = "Services";
+  static const String stores = "Stores";
   static const String details = "details";
   static const String about = "about";
   static const String storeDetails = "store_details";
@@ -45,6 +45,13 @@ class StringsManager {
   static const String inviteYourFriends = "invite_your_friends";
   static const String logout = "logout";
   static const String invalidMobileNumber = "Invalid mobile number";
+
+  static const List<String> titles = [
+    home,
+    search,
+    notifications,
+    settings,
+  ];
 
   // error handler
   static const String badRequestError = "bad_request_error";

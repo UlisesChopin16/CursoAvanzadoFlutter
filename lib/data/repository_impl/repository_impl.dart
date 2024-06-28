@@ -1,6 +1,7 @@
 import 'package:curso_avanzado_flutter/data/data_source/remote_data_source.dart';
 import 'package:curso_avanzado_flutter/data/mapper/customer_mapper.dart';
 import 'package:curso_avanzado_flutter/data/mapper/forgot_password_mapper.dart';
+import 'package:curso_avanzado_flutter/data/mapper/home_mapper.dart';
 import 'package:curso_avanzado_flutter/data/network/error_handler.dart';
 import 'package:curso_avanzado_flutter/data/network/failures/failure.dart';
 import 'package:curso_avanzado_flutter/data/network/network_info/network_info.dart';
@@ -8,8 +9,10 @@ import 'package:curso_avanzado_flutter/data/request/forgot_password_request.dart
 import 'package:curso_avanzado_flutter/data/request/login_request.dart';
 import 'package:curso_avanzado_flutter/data/request/register_request.dart';
 import 'package:curso_avanzado_flutter/data/responses/forgot_password_response/forgot_password_response.dart';
+import 'package:curso_avanzado_flutter/data/responses/home_response/home_response.dart';
 import 'package:curso_avanzado_flutter/data/responses/login_response/login_response.dart';
 import 'package:curso_avanzado_flutter/domain/models/forgot_password_model_rep/forgot_password_model_rep.dart';
+import 'package:curso_avanzado_flutter/domain/models/home_response_model/home_response_model.dart';
 import 'package:curso_avanzado_flutter/domain/models/login_response_model/login_response_model.dart';
 import 'package:curso_avanzado_flutter/domain/repository/repository.dart';
 import 'package:dartz/dartz.dart';
@@ -85,7 +88,7 @@ class RepositoryImpl implements Repository {
           ),
         );
       }
-      return Right(response.toDomain()); 
+      return Right(response.toDomain());
     } catch (e) {
       return Left(
         ErrorHandler.handle(e).failure,
@@ -110,6 +113,40 @@ class RepositoryImpl implements Repository {
       }
 
       response = await remoteDataSource.registerCustomerRDS(registerRequest);
+
+      if (response.status != 200) {
+        // return error
+        return Left(
+          Failure(
+            code: 409,
+            message: response.message ?? 'Error in the request, please try again later.',
+          ),
+        );
+      }
+      return Right(response.toDomain());
+    } catch (e) {
+      return Left(
+        ErrorHandler.handle(e).failure,
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failure, HomeResponseModel>> getHomeRepository() async {
+    HomeResponse response = const HomeResponse();
+    try {
+      final bool isConnected = await networkInfo.isConnected;
+      if (!isConnected) {
+        // return connection error
+        return const Left(
+          Failure(
+            code: 408,
+            message: 'No internet connection, please try again later.',
+          ),
+        );
+      }
+
+      response = await remoteDataSource.getHomeRDS();
 
       if (response.status != 200) {
         // return error
