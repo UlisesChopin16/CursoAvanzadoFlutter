@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 class TextSectionComponent extends StatelessWidget {
   final String text;
-
   const TextSectionComponent({
     super.key,
     required this.text,
@@ -13,15 +12,8 @@ class TextSectionComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(
-        top: AppPadding.p12,
-        left: AppPadding.p30,
-        right: AppPadding.p12,
-        bottom: AppPadding.p2,
-      ),
-      child: TitleBoldComponent(
-        text: text,
-      ),
+      padding: const EdgeInsets.only(left: AppPadding.p30),
+      child: TitleBoldComponent(text: text),
     );
   }
 }

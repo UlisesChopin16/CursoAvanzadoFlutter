@@ -58,16 +58,18 @@ class PageHome extends ConsumerWidget {
 
     return Center(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Gap(AppSize.s28),
           const CarouselBannersComponent(),
+          const Gap(AppSize.s12),
           const TextSectionComponent(
             text: StringsManager.services,
           ),
           ListItemsComponent(
             items: services,
           ),
+          const Gap(AppSize.s12),
           const TextSectionComponent(
             text: StringsManager.stores,
           ),
