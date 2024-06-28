@@ -10,6 +10,7 @@ import 'package:curso_avanzado_flutter/data/network/failures/failure.dart';
 import 'package:curso_avanzado_flutter/presentation/common/components/animated_image_component.dart';
 import 'package:curso_avanzado_flutter/presentation/common/components/dialog_component.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 enum StateRendererType {
   // POPUP STATES
@@ -158,7 +159,7 @@ class RetryButton extends StatelessWidget {
                   stateRendererType == StateRendererType.POPUP_ERROR_STATE) {
                 retryActionFunction?.call(); // to call the API function again to retry
               } else {
-                Navigator.of(context).pop(); // popup state error so we need to dismiss the dialog
+                context.pop(); // popup state error so we need to dismiss the dialog
               }
             },
             child: Text(

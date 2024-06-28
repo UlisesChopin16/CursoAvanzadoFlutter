@@ -1,7 +1,7 @@
 import 'package:curso_avanzado_flutter/data/network/failures/failure.dart';
 import 'package:curso_avanzado_flutter/data/request/forgot_password_request.dart';
 import 'package:curso_avanzado_flutter/domain/models/forgot_password_model_rep/forgot_password_model_rep.dart';
-import 'package:curso_avanzado_flutter/domain/repository/repository.dart';
+import 'package:curso_avanzado_flutter/data/repository/repository.dart';
 import 'package:curso_avanzado_flutter/domain/usecase/base_use_case.dart';
 import 'package:dartz/dartz.dart';
 

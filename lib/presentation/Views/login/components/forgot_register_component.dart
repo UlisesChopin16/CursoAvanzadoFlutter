@@ -4,6 +4,7 @@ import 'package:curso_avanzado_flutter/presentation/common/components/text_butto
 import 'package:curso_avanzado_flutter/presentation/routes/routes_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 
 class ForgotRegisterComponent extends StatelessWidget {
   const ForgotRegisterComponent({
@@ -24,7 +25,7 @@ class ForgotRegisterComponent extends StatelessWidget {
           // FORGOT PASSWORD
           TextButtonComponent(
             onPressed: () {
-              Navigator.of(context).pushNamed(Routes.forgotPasswordRoute);
+              context.pushNamed(Routes.forgotPasswordRouteName);
             },
             text: StringsManager.forgetPassword,
           ),
@@ -33,7 +34,7 @@ class ForgotRegisterComponent extends StatelessWidget {
           Flexible(
             child: TextButtonComponent(
               onPressed: () {
-                Navigator.of(context).pushNamed(Routes.registerRoute);
+                context.pushNamed(Routes.registerRouteName);
               },
               text: StringsManager.registerText,
             ),

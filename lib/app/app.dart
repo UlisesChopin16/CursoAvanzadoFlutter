@@ -1,6 +1,7 @@
 import 'package:curso_avanzado_flutter/constants/theme_manager.dart';
 import 'package:curso_avanzado_flutter/presentation/routes/routes_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class MyApp extends StatefulWidget {
   // private named constructor
@@ -20,10 +21,13 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      onGenerateRoute: RouteGenerator.getRoute,
-      initialRoute: Routes.splashRoute,
+      routerConfig: GoRouter(
+        debugLogDiagnostics: true,
+        initialLocation: Routes.splashRoute,
+        routes: RoutesManager.routes,
+      ),
       theme: themeData,
     );
   }

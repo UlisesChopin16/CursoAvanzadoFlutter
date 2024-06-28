@@ -1,8 +1,9 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:curso_avanzado_flutter/constants/color_manager.dart';
 import 'package:curso_avanzado_flutter/constants/values_manager.dart';
 import 'package:curso_avanzado_flutter/domain/models/home_response_model/home_content_response_model.dart';
+import 'package:curso_avanzado_flutter/presentation/routes/routes_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ListItemsComponent extends StatelessWidget {
   final List<HomeContentResponseModel>? items;
@@ -13,17 +14,22 @@ class ListItemsComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CarouselSlider(
-      options: CarouselOptions(
-        height: AppSize.s180,
-        enlargeCenterPage: true,
-        autoPlay: true,
-        viewportFraction: 0.38,
-        enableInfiniteScroll: true,
-      ),
-      items: items!
-          .map(
-            (item) => Card(
+    return SizedBox(
+      height: AppSize.s180,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: items?.length ?? 0,
+        itemBuilder: (context, index) {
+          final item = items![index];
+          return InkWell(
+            onTap: () {
+              // print(context.debugDoingBuild);
+
+              context.pushNamed(
+                Routes.storeDetailsRouteName,
+              );
+            },
+            child: Card(
               elevation: AppSize.s4,
               margin:
                   const EdgeInsets.symmetric(horizontal: AppPadding.p8, vertical: AppPadding.p12),
@@ -63,8 +69,9 @@ class ListItemsComponent extends StatelessWidget {
                 ],
               ),
             ),
-          )
-          .toList(),
+          );
+        },
+      ),
     );
   }
 }

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class FormComponent extends HookConsumerWidget {
@@ -76,7 +77,7 @@ class FormComponent extends HookConsumerWidget {
                       ref.read(loginViewModelProvider.notifier).login(
                         onDone: () {
                           SchedulerBinding.instance.addPostFrameCallback((_) {
-                            Navigator.pushReplacementNamed(context, Routes.mainRoute);
+                            context.pushReplacementNamed(Routes.mainRouteName);
                           });
                         },
                       );

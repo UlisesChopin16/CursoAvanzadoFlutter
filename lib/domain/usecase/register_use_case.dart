@@ -1,7 +1,7 @@
 import 'package:curso_avanzado_flutter/data/network/failures/failure.dart';
 import 'package:curso_avanzado_flutter/data/request/register_request.dart';
 import 'package:curso_avanzado_flutter/domain/models/login_response_model/login_response_model.dart';
-import 'package:curso_avanzado_flutter/domain/repository/repository.dart';
+import 'package:curso_avanzado_flutter/data/repository/repository.dart';
 import 'package:curso_avanzado_flutter/domain/usecase/base_use_case.dart';
 import 'package:dartz/dartz.dart';
 

@@ -5,12 +5,14 @@ import 'package:curso_avanzado_flutter/data/request/register_request.dart';
 import 'package:curso_avanzado_flutter/data/responses/forgot_password_response/forgot_password_response.dart';
 import 'package:curso_avanzado_flutter/data/responses/home_response/home_response.dart';
 import 'package:curso_avanzado_flutter/data/responses/login_response/login_response.dart';
+import 'package:curso_avanzado_flutter/data/responses/store_details_response/store_details_response.dart';
 
 abstract class RemoteDataSource {
   Future<LoginResponse> loginCustomerRDS(LoginRequest loginRequest);
   Future<ForgotPasswordResponse> forgotPasswordRDS(ForgotPasswordRequest forgotPasswordRequest);
   Future<LoginResponse> registerCustomerRDS(RegisterRequest registerRequest);
   Future<HomeResponse> getHomeRDS();
+  Future<StoreDetailsResponse> getStoreDetailsRDS();
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
@@ -42,6 +44,12 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   @override
   Future<HomeResponse> getHomeRDS() async {
     final response = await customerAppApi.getHome();
+    return response;
+  }
+
+  @override
+  Future<StoreDetailsResponse> getStoreDetailsRDS() async {
+    final response = await customerAppApi.getStoreDetails();
     return response;
   }
 }

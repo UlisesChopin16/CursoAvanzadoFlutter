@@ -10,6 +10,7 @@ import 'package:curso_avanzado_flutter/presentation/hooks/form_hook.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'components/widgets.dart';
@@ -92,7 +93,7 @@ class ViewRegister extends HookConsumerWidget {
                     const Gap(AppSize.s12),
                     TextButtonComponent(
                       onPressed: () {
-                        Navigator.of(context).pop(true);
+                        context.pop(true);
                       },
                       text: StringsManager.haveAccount,
                     ),
@@ -120,7 +121,7 @@ class ViewRegister extends HookConsumerWidget {
                 onTap: () async {
                   await ref.read(registerViewModelProvider.notifier).imageFromGallery();
                   if (!context.mounted) return;
-                  Navigator.of(context).pop();
+                  context.pop(true);
                 },
               ),
               ListTile(
@@ -130,7 +131,7 @@ class ViewRegister extends HookConsumerWidget {
                 onTap: () async {
                   await ref.read(registerViewModelProvider.notifier).imageFromCamera();
                   if (!context.mounted) return;
-                  Navigator.of(context).pop();
+                  context.pop(true);
                 },
               )
             ],

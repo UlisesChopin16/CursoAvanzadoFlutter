@@ -2,6 +2,7 @@ import 'package:curso_avanzado_flutter/constants/strings_manager.dart';
 import 'package:curso_avanzado_flutter/data/mapper/customer_mapper.dart';
 import 'package:curso_avanzado_flutter/presentation/common/state_renderer.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 abstract class FlowState {
   StateRendererType getStateRendererType();
@@ -106,7 +107,6 @@ extension FlowStateExtension on FlowState {
         }
       case ErrorState:
         {
-          dismissPopUp(context);
           if (getStateRendererType() != StateRendererType.POPUP_ERROR_STATE) {
             return StateRenderer(
               stateRendererType: getStateRendererType(),
@@ -114,6 +114,7 @@ extension FlowStateExtension on FlowState {
               retryActionFunction: retryActionFunction,
             );
           }
+          dismissPopUp(context);
           showPopUp(context, getStateRendererType(), getMessage(), retryActionFunction);
           return contentScreenWidget;
         }
@@ -132,7 +133,6 @@ extension FlowStateExtension on FlowState {
         }
       case SuccessState:
         {
-          dismissPopUp(context);
           if (getStateRendererType() != StateRendererType.POPUP_SUCCESS) {
             return StateRenderer(
               stateRendererType: getStateRendererType(),
@@ -141,6 +141,7 @@ extension FlowStateExtension on FlowState {
               title: getTitle(),
             );
           }
+          dismissPopUp(context);
           showPopUp(
             context,
             getStateRendererType(),
@@ -158,8 +159,9 @@ extension FlowStateExtension on FlowState {
   }
 
   void dismissPopUp(BuildContext context) {
-    if (_isThereCurrentDialogShowing(context)) {
-      Navigator.of(context, rootNavigator: true).pop(true);
+    if (_isThereCurrentDialogShowing(context) &&
+        getStateRendererType() == StateRendererType.POPUP_LOADING_STATE) {
+      context.pop(true);
     }
   }
 

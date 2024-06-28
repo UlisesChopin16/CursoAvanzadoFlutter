@@ -6,6 +6,7 @@ import 'package:curso_avanzado_flutter/constants/assets_manager.dart';
 import 'package:curso_avanzado_flutter/constants/color_manager.dart';
 import 'package:curso_avanzado_flutter/presentation/routes/routes_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -25,14 +26,14 @@ class _SplashViewState extends State<SplashView> {
 
   void _goNext() {
     if (!_appPreferences.isOnBoardingScreenViewed()) {
-      Navigator.pushReplacementNamed(context, Routes.onBoardingRoute);
+      context.pushReplacementNamed(Routes.onBoardingRouteName);
       return;
     } 
     if (!_appPreferences.isUserLoggedIn()) {
-      Navigator.pushReplacementNamed(context, Routes.loginRoute);
+      context.pushReplacementNamed(Routes.loginRouteName);
       return;
     }
-    Navigator.pushReplacementNamed(context, Routes.mainRoute);
+    context.pushReplacementNamed(Routes.mainRouteName);
   }
 
   @override

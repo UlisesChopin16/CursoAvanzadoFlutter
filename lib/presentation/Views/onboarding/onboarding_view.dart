@@ -11,6 +11,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class OnboardingView extends HookConsumerWidget {
@@ -59,7 +60,7 @@ class OnboardingView extends HookConsumerWidget {
               child: TextButtonComponent(
                 onPressed: () {
                   viewModel.skipOnBoarding();
-                  Navigator.pushReplacementNamed(context, Routes.loginRoute);
+                  context.pushReplacementNamed(Routes.loginRouteName);
                 },
                 text: StringsManager.skip,
               ),

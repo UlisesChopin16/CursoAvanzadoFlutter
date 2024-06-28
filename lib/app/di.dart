@@ -3,12 +3,13 @@ import 'package:curso_avanzado_flutter/data/data_source/remote_data_source.dart'
 import 'package:curso_avanzado_flutter/data/network/apis/customer_apis/customer_app_api.dart';
 import 'package:curso_avanzado_flutter/data/network/dio_factory.dart';
 import 'package:curso_avanzado_flutter/data/network/network_info/network_info.dart';
-import 'package:curso_avanzado_flutter/data/repository_impl/repository_impl.dart';
-import 'package:curso_avanzado_flutter/domain/repository/repository.dart';
+import 'package:curso_avanzado_flutter/data/repository/repository_impl.dart';
+import 'package:curso_avanzado_flutter/data/repository/repository.dart';
 import 'package:curso_avanzado_flutter/domain/usecase/forgot_password_use_case.dart';
 import 'package:curso_avanzado_flutter/domain/usecase/home_use_case.dart';
 import 'package:curso_avanzado_flutter/domain/usecase/login_use_case.dart';
 import 'package:curso_avanzado_flutter/domain/usecase/register_use_case.dart';
+import 'package:curso_avanzado_flutter/domain/usecase/store_details_use_case.dart';
 import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -91,6 +92,15 @@ void initHomeModule() {
   if (!GetIt.I.isRegistered<HomeUseCase>()) {
     instance.registerFactory<HomeUseCase>(
       () => HomeUseCase(instance()),
+    );
+  }
+}
+
+void initStoreDetailsModule() {
+  // Register your dependencies here
+  if (!GetIt.I.isRegistered<StoreDetailsUseCase>()) {
+    instance.registerFactory<StoreDetailsUseCase>(
+      () => StoreDetailsUseCase(instance()),
     );
   }
 }
