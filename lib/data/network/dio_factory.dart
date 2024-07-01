@@ -21,11 +21,14 @@ class DioFactory {
 
     const Duration timeOut = Duration(minutes: 1);
 
+    String language = await appPreferences.getAppLanguage();
+    String token = await appPreferences.getUserToken();
+
     Map<String, String> headers = {
       CONTENT_TYPE: APLICATION_JSON,
       ACCEPT: APLICATION_JSON,
-      AUTHORIZATION: Constants.token,
-      DEFAULT_LANGUAGE: 'en',
+      AUTHORIZATION: token,
+      DEFAULT_LANGUAGE: language,
     };
 
     dio.options = BaseOptions(

@@ -19,7 +19,7 @@ class LoginObject with _$LoginObject {
     @Default(true) bool isUserNameValid,
     @Default(true) bool isPasswordValid,
     @Default(false) bool isAllInputsValid,
-    @Default(false) bool isUserLoggedIn,
+    @Default('') String isUserLoggedIn,
     @Default(null) FlowState? flowState,
   }) = _LoginObject;
 }
@@ -58,16 +58,20 @@ class LoginViewModel extends _$LoginViewModel implements LoginViewModelInputs {
           ),
         );
       },
-      (loginResponseModel) {
+      (loginResponseModel) async {
+        state = state.copyWith(
+          isUserLoggedIn: 'isUserLoggedIn',
+        );
+        _appPreferences.setIsUserLoggedIn();
+        _appPreferences.setUserToken(state.isUserLoggedIn);
         state = state.copyWith(
           flowState: SuccessState(
             stateRendererType: StateRendererType.POPUP_SUCCESS,
-            title: 'Success',
-            message: 'You have successfully logged in.',
+            message: loginResponseModel.message,
           ),
-          isUserLoggedIn: true,
         );
-        _appPreferences.setIsUserLoggedIn();
+        await resetAllModules();
+
         onDone();
       },
     );
@@ -82,7 +86,7 @@ class LoginViewModel extends _$LoginViewModel implements LoginViewModelInputs {
     );
     await _appPreferences.logout();
     state = state.copyWith(
-      isUserLoggedIn: false,
+      isUserLoggedIn: '',
       flowState: ContentState(
         isPop: true,
       ),

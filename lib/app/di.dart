@@ -3,8 +3,8 @@ import 'package:curso_avanzado_flutter/data/data_source/remote_data_source.dart'
 import 'package:curso_avanzado_flutter/data/network/apis/customer_apis/customer_app_api.dart';
 import 'package:curso_avanzado_flutter/data/network/dio_factory.dart';
 import 'package:curso_avanzado_flutter/data/network/network_info/network_info.dart';
-import 'package:curso_avanzado_flutter/data/repository/repository_impl.dart';
 import 'package:curso_avanzado_flutter/data/repository/repository.dart';
+import 'package:curso_avanzado_flutter/data/repository/repository_impl.dart';
 import 'package:curso_avanzado_flutter/domain/usecase/forgot_password_use_case.dart';
 import 'package:curso_avanzado_flutter/domain/usecase/home_use_case.dart';
 import 'package:curso_avanzado_flutter/domain/usecase/login_use_case.dart';
@@ -99,4 +99,13 @@ void initStoreDetailsModule() {
       () => StoreDetailsUseCase(instance()),
     );
   }
+}
+
+Future<void> resetAllModules() async {
+  instance.reset(dispose: false);
+  await initAppModule();
+  initForgotPasswordModule();
+  initRegisterModule();
+  initHomeModule();
+  initStoreDetailsModule();
 }
