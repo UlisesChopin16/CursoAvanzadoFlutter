@@ -5,6 +5,7 @@ import 'package:curso_avanzado_flutter/presentation/Views/main/pages/home_page/s
 import 'package:curso_avanzado_flutter/presentation/common/components/title_component.dart';
 import 'package:curso_avanzado_flutter/presentation/common/state_render_impl.dart';
 import 'package:curso_avanzado_flutter/presentation/hooks/use_launch_effect.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -59,24 +60,24 @@ class StoreDetails extends ConsumerWidget {
           ),
         ),
         const Gap(AppSize.s16),
-        const TextSectionComponent(
-          text: StringsManager.details,
+        TextSectionComponent(
+          text: StringsManager.details.tr(),
         ),
         const Gap(AppSize.s8),
         ParagraphSectionComponent(
           text: details,
         ),
         const Gap(AppSize.s20),
-        const TextSectionComponent(
-          text: StringsManager.services,
+        TextSectionComponent(
+          text: StringsManager.services.tr(),
         ),
         const Gap(AppSize.s8),
         ParagraphSectionComponent(
           text: services,
         ),
         const Gap(AppSize.s20),
-        const TextSectionComponent(
-          text: StringsManager.about,
+        TextSectionComponent(
+          text: StringsManager.about.tr(),
         ),
         const Gap(AppSize.s8),
         ParagraphSectionComponent(

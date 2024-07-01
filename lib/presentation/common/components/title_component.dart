@@ -1,6 +1,7 @@
 import 'package:curso_avanzado_flutter/constants/color_manager.dart';
 import 'package:curso_avanzado_flutter/constants/font_manager.dart';
 import 'package:curso_avanzado_flutter/constants/styles_manager.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class TitleBoldComponent extends StatelessWidget {
@@ -16,7 +17,7 @@ class TitleBoldComponent extends StatelessWidget {
         fontSize: FontSize.s18,
         color: color,
       ),
-    );
+    ).tr();
   }
 }
 
@@ -33,6 +34,6 @@ class TitleRegularComponent extends StatelessWidget {
         fontSize: FontSize.s16,
         color: color,
       ),
-    );
+    ).tr();
   }
 }

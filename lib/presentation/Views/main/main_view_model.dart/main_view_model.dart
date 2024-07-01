@@ -3,6 +3,7 @@ import 'package:curso_avanzado_flutter/presentation/Views/main/pages/home_page/h
 import 'package:curso_avanzado_flutter/presentation/Views/main/pages/notifications_page/notifications_page.dart';
 import 'package:curso_avanzado_flutter/presentation/Views/main/pages/search_page/search_page.dart';
 import 'package:curso_avanzado_flutter/presentation/Views/main/pages/settings_page/settings_page.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -40,7 +41,7 @@ class MainViewModel extends _$MainViewModel implements MainViewModelInputs {
   void changeIndex(int index) {
     state = state.copyWith(
       currentIndex: index,
-      title: StringsManager.titles[index],
+      title: StringsManager.titles[index].tr(),
     );
   }
 

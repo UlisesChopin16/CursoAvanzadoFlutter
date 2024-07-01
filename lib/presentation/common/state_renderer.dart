@@ -9,6 +9,7 @@ import 'package:curso_avanzado_flutter/data/mapper/customer_mapper.dart';
 import 'package:curso_avanzado_flutter/data/network/failures/failure.dart';
 import 'package:curso_avanzado_flutter/presentation/common/components/animated_image_component.dart';
 import 'package:curso_avanzado_flutter/presentation/common/components/dialog_component.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -62,7 +63,7 @@ class StateRenderer extends StatelessWidget {
             RetryButton(
               stateRendererType: stateRendererType,
               retryActionFunction: retryActionFunction,
-              buttonTitle: StringsManager.ok,
+              buttonTitle: StringsManager.ok.tr(),
             ),
           ],
         );
@@ -75,7 +76,7 @@ class StateRenderer extends StatelessWidget {
             RetryButton(
               stateRendererType: stateRendererType,
               retryActionFunction: retryActionFunction,
-              buttonTitle: StringsManager.ok,
+              buttonTitle: StringsManager.ok.tr(),
             )
           ],
         );
@@ -118,7 +119,7 @@ class StateRenderer extends StatelessWidget {
         child: Text(
           message,
           style: getMediumStyle(color: ColorManager.black, fontSize: FontSize.s16),
-        ),
+        ).tr(),
       ),
     );
   }
@@ -165,7 +166,7 @@ class RetryButton extends StatelessWidget {
             child: Text(
               buttonTitle,
               style: Theme.of(context).textTheme.displayMedium,
-            ),
+            ).tr(),
           ),
         ),
       ),

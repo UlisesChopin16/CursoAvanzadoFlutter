@@ -6,6 +6,7 @@ import 'package:curso_avanzado_flutter/constants/values_manager.dart';
 import 'package:curso_avanzado_flutter/presentation/Views/main/pages/home_page/home_view_model/home_view_model.dart';
 import 'package:curso_avanzado_flutter/presentation/common/state_render_impl.dart';
 import 'package:curso_avanzado_flutter/presentation/hooks/use_launch_effect.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -63,15 +64,15 @@ class PageHome extends ConsumerWidget {
         children: [
           const CarouselBannersComponent(),
           const Gap(AppSize.s12),
-          const TextSectionComponent(
-            text: StringsManager.services,
+          TextSectionComponent(
+            text: StringsManager.services.tr(),
           ),
           ListItemsComponent(
             items: services,
           ),
           const Gap(AppSize.s12),
-          const TextSectionComponent(
-            text: StringsManager.stores,
+          TextSectionComponent(
+            text: StringsManager.stores.tr(),
           ),
           ListItemsComponent(
             items: stores,

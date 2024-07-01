@@ -54,6 +54,7 @@ class LoginViewModel extends _$LoginViewModel implements LoginViewModelInputs {
           flowState: ErrorState(
             stateRendererType: StateRendererType.POPUP_ERROR_STATE,
             message: failure.message,
+            isPop: true,
           ),
         );
       },
@@ -69,6 +70,22 @@ class LoginViewModel extends _$LoginViewModel implements LoginViewModelInputs {
         _appPreferences.setIsUserLoggedIn();
         onDone();
       },
+    );
+  }
+
+  @override
+  Future<void> logoutL() async {
+    state = state.copyWith(
+      flowState: LoadingState(
+        stateRendererType: StateRendererType.POPUP_LOADING_STATE,
+      ),
+    );
+    await _appPreferences.logout();
+    state = state.copyWith(
+      isUserLoggedIn: false,
+      flowState: ContentState(
+        isPop: true,
+      ),
     );
   }
 
@@ -103,7 +120,9 @@ class LoginViewModel extends _$LoginViewModel implements LoginViewModelInputs {
 
   void retryAction() {
     state = state.copyWith(
-      flowState: ContentState(),
+      flowState: ContentState(
+        isPop: true,
+      ),
     );
   }
 }
@@ -113,6 +132,7 @@ abstract class LoginViewModelInputs {
   void setUserName(String userName);
   void setPassword(String password);
   void login({required VoidCallback onDone});
+  Future<void> logoutL();
 }
 
 /* 

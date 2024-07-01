@@ -16,6 +16,14 @@
 	<string>Tut App</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
+	<!-- this line is for the translation -->
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>en</string>
+		<string>nb</string>
+		<!-- español -->
+		<string>es</string>
+	</array>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>

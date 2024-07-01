@@ -6,6 +6,7 @@ import 'package:curso_avanzado_flutter/domain/models/slider_object_model/slider_
 import 'package:curso_avanzado_flutter/presentation/Views/onboarding/onboardin_view_model/onboarding_view_model.dart';
 import 'package:curso_avanzado_flutter/presentation/common/components/text_button_component.dart';
 import 'package:curso_avanzado_flutter/presentation/routes/routes_manager.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -28,7 +29,7 @@ class OnboardingView extends HookConsumerWidget {
     final (length, index) = ref.watch(
         onboardingViewModelProvider.select((value) => (value.numOfSliders, value.currentIndex)));
 
-    const sliders = SliderViewObject.sliders;
+    final sliders = SliderViewObject.sliders;
     return Scaffold(
       backgroundColor: ColorManager.white,
       appBar: AppBar(
@@ -62,7 +63,7 @@ class OnboardingView extends HookConsumerWidget {
                   viewModel.skipOnBoarding();
                   context.pushReplacementNamed(Routes.loginRouteName);
                 },
-                text: StringsManager.skip,
+                text: StringsManager.skip.tr(),
               ),
             ),
             IndicatorPage(

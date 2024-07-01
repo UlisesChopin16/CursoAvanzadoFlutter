@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class TextButtonComponent extends StatelessWidget {
@@ -17,7 +18,7 @@ class TextButtonComponent extends StatelessWidget {
         text,
         textAlign: TextAlign.end,
         style: Theme.of(context).textTheme.titleSmall,
-      ),
+      ).tr(),
     );
   }
 }

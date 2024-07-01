@@ -1,6 +1,7 @@
 import 'package:curso_avanzado_flutter/constants/strings_manager.dart';
 import 'package:curso_avanzado_flutter/data/mapper/customer_mapper.dart';
 import 'package:curso_avanzado_flutter/presentation/common/state_renderer.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -8,6 +9,7 @@ abstract class FlowState {
   StateRendererType getStateRendererType();
   String getMessage();
   String getTitle() => empty;
+  bool isPopUp() => false;
 }
 
 class LoadingState extends FlowState {
@@ -50,10 +52,12 @@ class SuccessState extends FlowState {
 class ErrorState extends FlowState {
   final StateRendererType stateRendererType;
   final String message;
+  final bool isPop;
 
   ErrorState({
     required this.stateRendererType,
     required this.message,
+    this.isPop = false,
   });
 
   @override
@@ -61,16 +65,25 @@ class ErrorState extends FlowState {
 
   @override
   String getMessage() => message;
+
+  @override
+  bool isPopUp() => isPop;
 }
 
 class ContentState extends FlowState {
-  ContentState();
+  final bool isPop;
+  ContentState({
+    this.isPop = false,
+  });
 
   @override
   StateRendererType getStateRendererType() => StateRendererType.CONTENT_SCREEN_STATE;
 
   @override
   String getMessage() => empty;
+
+  @override
+  bool isPopUp() => isPop;
 }
 
 class EmptyState extends FlowState {
@@ -98,55 +111,55 @@ extension FlowStateExtension on FlowState {
           if (getStateRendererType() != StateRendererType.POPUP_LOADING_STATE) {
             return StateRenderer(
               stateRendererType: getStateRendererType(),
-              message: getMessage(),
+              message: getMessage().tr(),
               retryActionFunction: retryActionFunction,
             );
           }
-          showPopUp(context, getStateRendererType(), getMessage(), retryActionFunction);
+          showPopUp(context, getStateRendererType(), getMessage().tr(), retryActionFunction);
           return contentScreenWidget;
         }
       case ErrorState:
         {
+          dismissPopUp(context, isPop: isPopUp());
           if (getStateRendererType() != StateRendererType.POPUP_ERROR_STATE) {
             return StateRenderer(
               stateRendererType: getStateRendererType(),
-              message: getMessage(),
+              message: getMessage().tr(),
               retryActionFunction: retryActionFunction,
             );
           }
-          dismissPopUp(context);
-          showPopUp(context, getStateRendererType(), getMessage(), retryActionFunction);
+          showPopUp(context, getStateRendererType(), getMessage().tr(), retryActionFunction);
           return contentScreenWidget;
         }
       case ContentState:
         {
-          dismissPopUp(context);
+          dismissPopUp(context, isPop: isPopUp());
           return contentScreenWidget;
         }
       case EmptyState:
         {
           return StateRenderer(
             stateRendererType: getStateRendererType(),
-            message: getMessage(),
+            message: getMessage().tr(),
             retryActionFunction: retryActionFunction,
           );
         }
       case SuccessState:
         {
+          dismissPopUp(context);
           if (getStateRendererType() != StateRendererType.POPUP_SUCCESS) {
             return StateRenderer(
               stateRendererType: getStateRendererType(),
-              message: getMessage(),
+              message: getMessage().tr(),
               retryActionFunction: retryActionFunction,
-              title: getTitle(),
+              title: getTitle().tr(),
             );
           }
-          dismissPopUp(context);
           showPopUp(
             context,
             getStateRendererType(),
-            getMessage(),
-            title: getTitle(),
+            getMessage().tr(),
+            title: getTitle().tr(),
             retryActionFunction,
           );
           return contentScreenWidget;
@@ -158,9 +171,11 @@ extension FlowStateExtension on FlowState {
     }
   }
 
-  void dismissPopUp(BuildContext context) {
-    if (_isThereCurrentDialogShowing(context) &&
-        getStateRendererType() == StateRendererType.POPUP_LOADING_STATE) {
+  void dismissPopUp(BuildContext context, {bool isPop = false}) {
+    // final stateType = getStateRendererType();
+    final bool dialogIsShowing = _isThereCurrentDialogShowing(context);
+
+    if (dialogIsShowing && isPop) {
       context.pop(true);
     }
   }

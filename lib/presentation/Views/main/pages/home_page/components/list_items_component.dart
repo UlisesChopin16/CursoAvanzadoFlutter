@@ -2,6 +2,7 @@ import 'package:curso_avanzado_flutter/constants/color_manager.dart';
 import 'package:curso_avanzado_flutter/constants/values_manager.dart';
 import 'package:curso_avanzado_flutter/domain/models/home_response_model/home_content_response_model.dart';
 import 'package:curso_avanzado_flutter/presentation/routes/routes_manager.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -62,7 +63,7 @@ class ListItemsComponent extends StatelessWidget {
                         child: Text(
                           item.title,
                           textAlign: TextAlign.center,
-                        ),
+                        ).tr(),
                       ),
                     ),
                   )

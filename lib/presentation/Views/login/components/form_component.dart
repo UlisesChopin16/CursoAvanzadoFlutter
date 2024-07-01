@@ -2,6 +2,7 @@ import 'package:curso_avanzado_flutter/constants/strings_manager.dart';
 import 'package:curso_avanzado_flutter/constants/values_manager.dart';
 import 'package:curso_avanzado_flutter/presentation/Views/login/login_view_model/login_view_model.dart';
 import 'package:curso_avanzado_flutter/presentation/routes/routes_manager.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -43,9 +44,9 @@ class FormComponent extends HookConsumerWidget {
               ref.read(loginViewModelProvider.notifier).setUserName(value);
             },
             decoration: InputDecoration(
-              hintText: StringsManager.username,
-              labelText: StringsManager.username,
-              errorText: (userValid) ? null : StringsManager.usernameError,
+              hintText: StringsManager.username.tr(),
+              labelText: StringsManager.username.tr(),
+              errorText: (userValid) ? null : StringsManager.usernameError.tr(),
             ),
           ),
         ),
@@ -59,9 +60,9 @@ class FormComponent extends HookConsumerWidget {
               ref.read(loginViewModelProvider.notifier).setPassword(value);
             },
             decoration: InputDecoration(
-              hintText: StringsManager.password,
-              labelText: StringsManager.password,
-              errorText: (passwordValid) ? null : StringsManager.passwordError,
+              hintText: StringsManager.password.tr(),
+              labelText: StringsManager.password.tr(),
+              errorText: (passwordValid) ? null : StringsManager.passwordError.tr(),
             ),
           ),
         ),
@@ -84,7 +85,7 @@ class FormComponent extends HookConsumerWidget {
                     }
                   : null,
               child: Text(
-                StringsManager.login,
+                StringsManager.login.tr(),
                 style: Theme.of(context).textTheme.displayMedium,
               ),
             ),

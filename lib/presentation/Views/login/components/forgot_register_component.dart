@@ -2,6 +2,7 @@ import 'package:curso_avanzado_flutter/constants/strings_manager.dart';
 import 'package:curso_avanzado_flutter/constants/values_manager.dart';
 import 'package:curso_avanzado_flutter/presentation/common/components/text_button_component.dart';
 import 'package:curso_avanzado_flutter/presentation/routes/routes_manager.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
@@ -27,7 +28,7 @@ class ForgotRegisterComponent extends StatelessWidget {
             onPressed: () {
               context.pushNamed(Routes.forgotPasswordRouteName);
             },
-            text: StringsManager.forgetPassword,
+            text: StringsManager.forgetPassword.tr(),
           ),
           const Gap(AppSize.s8),
           // REGISTER
@@ -36,7 +37,7 @@ class ForgotRegisterComponent extends StatelessWidget {
               onPressed: () {
                 context.pushNamed(Routes.registerRouteName);
               },
-              text: StringsManager.registerText,
+              text: StringsManager.registerText.tr(),
             ),
           ),
         ],

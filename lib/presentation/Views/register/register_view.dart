@@ -7,6 +7,7 @@ import 'package:curso_avanzado_flutter/presentation/Views/register/register_view
 import 'package:curso_avanzado_flutter/presentation/common/state_render_impl.dart';
 import 'package:curso_avanzado_flutter/presentation/common/components/text_button_component.dart';
 import 'package:curso_avanzado_flutter/presentation/hooks/form_hook.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
@@ -59,7 +60,7 @@ class ViewRegister extends HookConsumerWidget {
                 child: Column(
                   children: [
                     Text(
-                      StringsManager.profilePicture,
+                      StringsManager.profilePicture.tr(),
                       style: getMediumStyle(color: ColorManager.darkGrey),
                     ),
                     GestureDetector(
@@ -95,7 +96,7 @@ class ViewRegister extends HookConsumerWidget {
                       onPressed: () {
                         context.pop(true);
                       },
-                      text: StringsManager.haveAccount,
+                      text: StringsManager.haveAccount.tr(),
                     ),
                   ],
                 ),
@@ -117,7 +118,7 @@ class ViewRegister extends HookConsumerWidget {
               ListTile(
                 trailing: const Icon(Icons.arrow_forward),
                 leading: const Icon(Icons.camera),
-                title: const Text(StringsManager.photoGallery),
+                title: Text(StringsManager.photoGallery.tr()),
                 onTap: () async {
                   await ref.read(registerViewModelProvider.notifier).imageFromGallery();
                   if (!context.mounted) return;
@@ -127,7 +128,7 @@ class ViewRegister extends HookConsumerWidget {
               ListTile(
                 trailing: const Icon(Icons.arrow_forward),
                 leading: const Icon(Icons.camera_alt_rounded),
-                title: const Text(StringsManager.photoCamera),
+                title: Text(StringsManager.photoCamera.tr()),
                 onTap: () async {
                   await ref.read(registerViewModelProvider.notifier).imageFromCamera();
                   if (!context.mounted) return;

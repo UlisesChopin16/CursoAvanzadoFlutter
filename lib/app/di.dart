@@ -57,15 +57,11 @@ Future<void> initAppModule() async {
       instance(),
     ),
   );
-}
 
-void initLoginModule() {
-  if (!GetIt.I.isRegistered<LoginUseCase>()) {
-    // Register your dependencies here
-    instance.registerFactory<LoginUseCase>(
-      () => LoginUseCase(instance()),
-    );
-  }
+  // login use case
+  instance.registerLazySingleton<LoginUseCase>(
+    () => LoginUseCase(instance()),
+  );
 }
 
 void initForgotPasswordModule() {

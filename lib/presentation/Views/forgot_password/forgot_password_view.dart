@@ -6,6 +6,7 @@ import 'package:curso_avanzado_flutter/presentation/Views/forgot_password/forgot
 import 'package:curso_avanzado_flutter/presentation/common/state_render_impl.dart';
 import 'package:curso_avanzado_flutter/presentation/common/components/text_button_component.dart';
 import 'package:curso_avanzado_flutter/presentation/hooks/form_hook.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -66,7 +67,7 @@ class ForgotView extends HookConsumerWidget {
                     const Gap(AppSize.s12),
                     TextButtonComponent(
                       onPressed: () {},
-                      text: StringsManager.resendEmail,
+                      text: StringsManager.resendEmail.tr(),
                     ),
                   ],
                 ),

@@ -4,6 +4,7 @@ import 'package:curso_avanzado_flutter/constants/strings_manager.dart';
 import 'package:curso_avanzado_flutter/constants/values_manager.dart';
 import 'package:curso_avanzado_flutter/presentation/Views/register/register_view_model/register_view_model.dart';
 import 'package:curso_avanzado_flutter/presentation/routes/routes_manager.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -53,9 +54,9 @@ class FormComponent extends HookConsumerWidget {
             controller: userNameController,
             onChanged: ref.read(registerViewModelProvider.notifier).onUserNameChanged,
             decoration: InputDecoration(
-              hintText: StringsManager.username,
-              labelText: StringsManager.username,
-              errorText: (userNameValid) ? null : StringsManager.usernameError,
+              hintText: StringsManager.username.tr(),
+              labelText: StringsManager.username.tr(),
+              errorText: (userNameValid) ? null : StringsManager.usernameError.tr(),
             ),
           ),
         ),
@@ -99,9 +100,9 @@ class FormComponent extends HookConsumerWidget {
                     FilteringTextInputFormatter.digitsOnly,
                   ],
                   decoration: InputDecoration(
-                    hintText: StringsManager.mobileNumber,
-                    labelText: StringsManager.mobileNumber,
-                    errorText: (mobileNumberValid) ? null : StringsManager.invalidMobileNumber,
+                    hintText: StringsManager.mobileNumber.tr(),
+                    labelText: StringsManager.mobileNumber.tr(),
+                    errorText: (mobileNumberValid) ? null : StringsManager.invalidMobileNumber.tr(),
                   ),
                   onChanged: ref.read(registerViewModelProvider.notifier).onMobileNumberChanged,
                 ),
@@ -117,9 +118,9 @@ class FormComponent extends HookConsumerWidget {
             controller: emailNameController,
             onChanged: ref.read(registerViewModelProvider.notifier).onEmailChanged,
             decoration: InputDecoration(
-              hintText: StringsManager.emailHint,
-              labelText: StringsManager.emailHint,
-              errorText: (emailValid) ? null : StringsManager.invalidEmail,
+              hintText: StringsManager.emailHint.tr(),
+              labelText: StringsManager.emailHint.tr(),
+              errorText: (emailValid) ? null : StringsManager.invalidEmail.tr(),
             ),
           ),
         ),
@@ -131,9 +132,9 @@ class FormComponent extends HookConsumerWidget {
             controller: passwordController,
             onChanged: ref.read(registerViewModelProvider.notifier).onPasswordChanged,
             decoration: InputDecoration(
-              hintText: StringsManager.password,
-              labelText: StringsManager.password,
-              errorText: (passwordValid) ? null : StringsManager.passwordError,
+              hintText: StringsManager.password.tr(),
+              labelText: StringsManager.password.tr(),
+              errorText: (passwordValid) ? null : StringsManager.passwordError.tr(),
             ),
           ),
         ),
@@ -157,7 +158,7 @@ class FormComponent extends HookConsumerWidget {
                     }
                   : null,
               child: Text(
-                StringsManager.register,
+                StringsManager.register.tr(),
                 style: Theme.of(context).textTheme.displayMedium,
               ),
             ),

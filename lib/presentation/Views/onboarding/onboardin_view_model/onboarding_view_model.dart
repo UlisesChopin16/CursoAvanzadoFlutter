@@ -4,6 +4,7 @@ import 'package:curso_avanzado_flutter/constants/assets_manager.dart';
 import 'package:curso_avanzado_flutter/constants/strings_manager.dart';
 import 'package:curso_avanzado_flutter/constants/values_manager.dart';
 import 'package:curso_avanzado_flutter/domain/models/slider_object_model/slider_object_model.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -19,25 +20,25 @@ class SliderViewObject with _$SliderViewObject {
     @Default(0) int currentIndex,
   }) = _SliderViewObject;
 
-  static const sliders = [
+  static final sliders = [
     SliderObjectModel(
-      title: StringsManager.onBoardingTitle1,
-      subTitle: StringsManager.onBoardingSubTitle1,
+      title: StringsManager.onBoardingTitle1.tr(),
+      subTitle: StringsManager.onBoardingSubTitle1.tr(),
       image: ImageAssets.onboardingLogo1,
     ),
     SliderObjectModel(
-      title: StringsManager.onBoardingTitle2,
-      subTitle: StringsManager.onBoardingSubTitle2,
+      title: StringsManager.onBoardingTitle2.tr(),
+      subTitle: StringsManager.onBoardingSubTitle2.tr(),
       image: ImageAssets.onboardingLogo2,
     ),
     SliderObjectModel(
-      title: StringsManager.onBoardingTitle3,
-      subTitle: StringsManager.onBoardingSubTitle3,
+      title: StringsManager.onBoardingTitle3.tr(),
+      subTitle: StringsManager.onBoardingSubTitle3.tr(),
       image: ImageAssets.onboardingLogo3,
     ),
     SliderObjectModel(
-      title: StringsManager.onBoardingTitle4,
-      subTitle: StringsManager.onBoardingSubTitle4,
+      title: StringsManager.onBoardingTitle4.tr(),
+      subTitle: StringsManager.onBoardingSubTitle4.tr(),
       image: ImageAssets.onboardingLogo4,
     ),
   ];

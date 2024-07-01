@@ -40,10 +40,7 @@ class RoutesManager {
     GoRoute(
       path: Routes.loginRoute,
       name: Routes.loginRouteName,
-      builder: (context, state) {
-        initLoginModule();
-        return const LoginView();
-      }
+      builder: (context, state) => const LoginView(),
     ),
     GoRoute(
       path: Routes.registerRoute,

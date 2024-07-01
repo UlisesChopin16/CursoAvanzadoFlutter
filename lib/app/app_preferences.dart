@@ -19,19 +19,12 @@ class AppPreferences {
     if (language != null && language.isNotEmpty) {
       return language;
     } else {
-      return LanguageType.ENGLISH.getValue();
+      return LanguageType.SPANISH.getValue();
     }
   }
 
-  Future<void> setLanguageChanged() async {
-    String currentLanguage = await getAppLanguage();
-    if (currentLanguage == LanguageType.ARABIC.getValue()) {
-      // save prefs with english lang
-      _sharedPreferences.setString(PREFS_KEY_LANG, LanguageType.ENGLISH.getValue());
-    } else {
-      // save prefs with arabic lang
-      _sharedPreferences.setString(PREFS_KEY_LANG, LanguageType.ARABIC.getValue());
-    }
+  Future<void> setLanguageChanged(LanguageType type) async {
+    _sharedPreferences.setString(PREFS_KEY_LANG, type.getValue());
   }
 
   Future<Locale> getLocal() async {
@@ -39,10 +32,12 @@ class AppPreferences {
     if (currentLanguage == LanguageType.ARABIC.getValue()) {
       // return arabic local
       return ARABIC_LOCAL;
-    } else {
+    }
+    if (currentLanguage == LanguageType.ENGLISH.getValue()) {
       // return english local
       return ENGLISH_LOCAL;
     }
+    return SPANISH_LOCAL;
   }
 
   Future<void> setOnBoardingScreenViewed() async {

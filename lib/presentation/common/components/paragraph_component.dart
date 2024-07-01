@@ -1,6 +1,7 @@
 import 'package:curso_avanzado_flutter/constants/color_manager.dart';
 import 'package:curso_avanzado_flutter/constants/font_manager.dart';
 import 'package:curso_avanzado_flutter/constants/styles_manager.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class ParagraphComponent extends StatelessWidget {
@@ -18,6 +19,6 @@ class ParagraphComponent extends StatelessWidget {
         fontSize: FontSize.s14,
         color: color,
       ),
-    );
+    ).tr();
   }
 }
